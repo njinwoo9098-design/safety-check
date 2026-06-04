@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>외도민 안전점검표 현장발송앱 PWA v99</title>
+<title>외도민 안전점검표 현장발송앱 PWA v100</title>
 <style>
   :root{
     --line:#111;
@@ -3630,6 +3630,21 @@
     .photo-picker-note{display:none!important;}
   }
 
+
+  /* v100: 휴대폰 사진 표시 안정화 */
+  .photo-box.loading-photo{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    text-align:center!important;
+    color:#334155!important;
+    font-size:8pt!important;
+    line-height:1.35!important;
+  }
+  @media print{
+    .photo-box.loading-photo{color:transparent!important;}
+  }
+
 </style>
 
 <link rel="manifest" href="manifest.webmanifest">
@@ -3642,7 +3657,7 @@
 </head>
 <body>
 <div class="toolbar">
-  <strong>외도민 안전점검표 현장발송앱 PWA v99</strong>
+  <strong>외도민 안전점검표 현장발송앱 PWA v100</strong>
   <button class="primary" onclick="saveForm()">입력값 저장</button>
   <button onclick="window.print()">PDF 저장 / 인쇄</button>
   <button class="warn" onclick="fillSample()">샘플값 입력</button>
@@ -3703,7 +3718,7 @@
 </div>
 
 
-<div class="photo-picker-note">사진칸을 누르면 기기 사진 선택기가 열립니다. 안드로이드에서 구글포토가 먼저 뜨면 상단/좌측 메뉴에서 <b>갤러리</b> 또는 <b>내 파일</b>을 선택하세요. 브라우저 보안상 특정 갤러리 앱만 강제로 여는 것은 제한됩니다.</div>
+<div class="photo-picker-note">사진칸을 누르면 기기 사진 선택기가 열립니다. 사진이 보이지 않으면 HEIC/클라우드 사진일 수 있으니 <b>갤러리/내 파일의 JPG·PNG 사진</b>을 선택해 주세요. 앱은 선택한 사진을 자동으로 JPEG로 변환해 저장합니다.</div>
 
 <section class="page" id="page1">
   <div class="title-wrap">
@@ -3941,7 +3956,7 @@
       <td class="detail-cell"><textarea id="detail_15"></textarea></td>
     </tr>
   </table>
-  <div class="footer-memo">※ 첫째장 입력형 / 현장발송앱 PWA v99</div>
+  <div class="footer-memo">※ 첫째장 입력형 / 현장발송앱 PWA v100</div>
 </section>
 
 <section class="page" id="page2">
@@ -4292,12 +4307,12 @@ function saveForm(showAlert=true){
     if(box && box.dataset.image) data["photoData_" + i] = box.dataset.image;
     if(cap) data["photoCaption_" + i] = cap.value;
   }
-  localStorage.setItem("safetyFieldSendAppPWA_V99", JSON.stringify(data));
+  localStorage.setItem("safetyFieldSendAppPWA_V100", JSON.stringify(data));
   if(showAlert) alert("입력값을 저장했습니다.");
 }
 
 function loadForm(){
-  const raw = localStorage.getItem("safetyFieldSendAppPWA_V99");
+  const raw = localStorage.getItem("safetyFieldSendAppPWA_V100");
   if(!raw) return;
   const data = JSON.parse(raw);
   if(data["districtText"]) document.getElementById("district").innerText = data["districtText"];
@@ -4359,7 +4374,7 @@ function fillSample(){
 
 function clearForm(){
   if(confirm("입력값을 모두 초기화할까요?")){
-    localStorage.removeItem("safetyFieldSendAppPWA_V99");
+    localStorage.removeItem("safetyFieldSendAppPWA_V100");
     location.reload();
   }
 }
@@ -4440,21 +4455,109 @@ function renderPhoto(i, src){
 function loadPhotoFile(file, i){
   return new Promise((resolve) => {
     if(!file){ resolve(); return; }
-    const reader = new FileReader();
-    reader.onload = function(e){
-      renderPhoto(i, e.target.result);
+
+    const box = document.getElementById("photoBox" + i);
+    if(box){
+      box.classList.add("loading-photo");
+      box.textContent = "사진 불러오는 중...";
+    }
+
+    const objectUrl = URL.createObjectURL(file);
+    const img = new Image();
+
+    img.onload = function(){
+      try{
+        const maxSide = 1800;
+        let w = img.naturalWidth || img.width;
+        let h = img.naturalHeight || img.height;
+
+        if(!w || !h){
+          throw new Error("사진 크기를 확인할 수 없습니다.");
+        }
+
+        const ratio = Math.min(1, maxSide / Math.max(w, h));
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.max(1, Math.round(w * ratio));
+        canvas.height = Math.max(1, Math.round(h * ratio));
+
+        const ctx = canvas.getContext("2d", {alpha:false});
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.9);
+        URL.revokeObjectURL(objectUrl);
+
+        if(box) box.classList.remove("loading-photo");
+        renderPhoto(i, dataUrl);
+
+        const caption = document.getElementById("photoCaption" + i);
+        if(caption && !caption.readOnly && !caption.value.trim()){
+          caption.value = file.name ? file.name.replace(/\.[^.]+$/, "") : "";
+        }
+
+        updatePage4PrintVisibility();
+        saveForm(false);
+        resolve();
+      }catch(err){
+        URL.revokeObjectURL(objectUrl);
+        fallbackReadPhotoAsDataUrl(file, i, resolve);
+      }
+    };
+
+    img.onerror = function(){
+      URL.revokeObjectURL(objectUrl);
+      fallbackReadPhotoAsDataUrl(file, i, resolve);
+    };
+
+    img.src = objectUrl;
+  });
+}
+
+function fallbackReadPhotoAsDataUrl(file, i, resolve){
+  const box = document.getElementById("photoBox" + i);
+  const reader = new FileReader();
+
+  reader.onload = function(e){
+    const dataUrl = e.target.result;
+    const testImg = new Image();
+
+    testImg.onload = function(){
+      if(box) box.classList.remove("loading-photo");
+      renderPhoto(i, dataUrl);
 
       const caption = document.getElementById("photoCaption" + i);
       if(caption && !caption.readOnly && !caption.value.trim()){
-        caption.value = file.name.replace(/\.[^.]+$/, "");
+        caption.value = file.name ? file.name.replace(/\.[^.]+$/, "") : "";
       }
 
       updatePage4PrintVisibility();
       saveForm(false);
       resolve();
     };
-    reader.readAsDataURL(file);
-  });
+
+    testImg.onerror = function(){
+      if(box){
+        box.classList.remove("loading-photo");
+        box.innerHTML = "사진 표시 실패<br>JPG/PNG 사진으로 다시 선택";
+      }
+      alert("선택한 사진 형식이 브라우저에서 바로 표시되지 않습니다. 휴대폰 갤러리에서 JPG/PNG로 저장된 사진을 선택하거나, 카메라 설정을 '높은 호환성/JPEG'으로 바꾼 뒤 다시 선택해 주세요.");
+      resolve();
+    };
+
+    testImg.src = dataUrl;
+  };
+
+  reader.onerror = function(){
+    if(box){
+      box.classList.remove("loading-photo");
+      box.innerHTML = "사진 불러오기 실패";
+    }
+    alert("사진을 불러오지 못했습니다. 갤러리 또는 내 파일에서 다시 선택해 주세요.");
+    resolve();
+  };
+
+  reader.readAsDataURL(file);
 }
 
 function loadPhoto(event, i){
