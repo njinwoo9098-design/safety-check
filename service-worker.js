@@ -1,4 +1,4 @@
-const CACHE_NAME = "safety-field-send-pwa-v103";
+const CACHE_NAME = "safety-field-send-pwa-v105";
 const APP_SHELL = [
   "./",
   "./index.html",
