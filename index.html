@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>외도민 안전점검표 현장발송앱 PWA v97</title>
+<title>외도민 안전점검표 현장발송앱 PWA v99</title>
 <style>
   :root{
     --line:#111;
@@ -3613,6 +3613,23 @@
     color:#111!important;
   }
 
+
+  /* v98: 휴대폰 사진 선택 안내 */
+  .photo-picker-note{
+    max-width:210mm;
+    margin:8px auto 0;
+    padding:8px 12px;
+    border:1px solid #d6e4ff;
+    background:#f8fbff;
+    color:#334155;
+    border-radius:10px;
+    font-size:12px;
+    line-height:1.45;
+  }
+  @media print{
+    .photo-picker-note{display:none!important;}
+  }
+
 </style>
 
 <link rel="manifest" href="manifest.webmanifest">
@@ -3625,7 +3642,7 @@
 </head>
 <body>
 <div class="toolbar">
-  <strong>외도민 안전점검표 현장발송앱 PWA v97</strong>
+  <strong>외도민 안전점검표 현장발송앱 PWA v99</strong>
   <button class="primary" onclick="saveForm()">입력값 저장</button>
   <button onclick="window.print()">PDF 저장 / 인쇄</button>
   <button class="warn" onclick="fillSample()">샘플값 입력</button>
@@ -3685,6 +3702,8 @@
   </div>
 </div>
 
+
+<div class="photo-picker-note">사진칸을 누르면 기기 사진 선택기가 열립니다. 안드로이드에서 구글포토가 먼저 뜨면 상단/좌측 메뉴에서 <b>갤러리</b> 또는 <b>내 파일</b>을 선택하세요. 브라우저 보안상 특정 갤러리 앱만 강제로 여는 것은 제한됩니다.</div>
 
 <section class="page" id="page1">
   <div class="title-wrap">
@@ -3922,7 +3941,7 @@
       <td class="detail-cell"><textarea id="detail_15"></textarea></td>
     </tr>
   </table>
-  <div class="footer-memo">※ 첫째장 입력형 / 현장발송앱 PWA v97</div>
+  <div class="footer-memo">※ 첫째장 입력형 / 현장발송앱 PWA v99</div>
 </section>
 
 <section class="page" id="page2">
@@ -4038,24 +4057,24 @@
   <div class="photo-page-title">■ 현황 및 점검 사진(추가 사진 첨부가능)</div>
   <table class="photo-page-table">
     <tr>
-      <td class="photo-cell" id="photoCell0" onclick="pickPhoto(0)"><div class="photo-box" id="photoBox0">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,0)">×</button><div class="photo-help">드래그로 위치 조정 후 사진 클릭하면 확정</div><div class="photo-placed-mark">배치완료</div><input class="photo-file-input" type="file" accept="image/*" id="photoInput0" onchange="loadPhoto(event,0)"></td>
-      <td class="photo-cell" id="photoCell1" onclick="pickPhoto(1)"><div class="photo-box" id="photoBox1">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,1)">×</button><div class="photo-help">드래그로 위치 조정 후 사진 클릭하면 확정</div><div class="photo-placed-mark">배치완료</div><input class="photo-file-input" type="file" accept="image/*" id="photoInput1" onchange="loadPhoto(event,1)"></td>
+      <td class="photo-cell" id="photoCell0" onclick="pickPhoto(0)"><div class="photo-box" id="photoBox0">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,0)">×</button><div class="photo-help">드래그로 위치 조정 후 사진 클릭하면 확정</div><div class="photo-placed-mark">배치완료</div><input class="photo-file-input" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" id="photoInput0" onchange="loadPhoto(event,0)"></td>
+      <td class="photo-cell" id="photoCell1" onclick="pickPhoto(1)"><div class="photo-box" id="photoBox1">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,1)">×</button><div class="photo-help">드래그로 위치 조정 후 사진 클릭하면 확정</div><div class="photo-placed-mark">배치완료</div><input class="photo-file-input" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" id="photoInput1" onchange="loadPhoto(event,1)"></td>
     </tr>
     <tr>
       <td class="caption-cell"><input class="caption-input" id="photoCaption0" value="정면사진" readonly></td>
       <td class="caption-cell"><input class="caption-input" id="photoCaption1" value="우측면사진" readonly></td>
     </tr>
     <tr>
-      <td class="photo-cell" id="photoCell2" onclick="pickPhoto(2)"><div class="photo-box" id="photoBox2">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,2)">×</button><div class="photo-help">드래그로 위치 조정 후 사진 클릭하면 확정</div><div class="photo-placed-mark">배치완료</div><input class="photo-file-input" type="file" accept="image/*" id="photoInput2" onchange="loadPhoto(event,2)"></td>
-      <td class="photo-cell" id="photoCell3" onclick="pickPhoto(3)"><div class="photo-box" id="photoBox3">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,3)">×</button><div class="photo-help">드래그로 위치 조정 후 사진 클릭하면 확정</div><div class="photo-placed-mark">배치완료</div><input class="photo-file-input" type="file" accept="image/*" id="photoInput3" onchange="loadPhoto(event,3)"></td>
+      <td class="photo-cell" id="photoCell2" onclick="pickPhoto(2)"><div class="photo-box" id="photoBox2">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,2)">×</button><div class="photo-help">드래그로 위치 조정 후 사진 클릭하면 확정</div><div class="photo-placed-mark">배치완료</div><input class="photo-file-input" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" id="photoInput2" onchange="loadPhoto(event,2)"></td>
+      <td class="photo-cell" id="photoCell3" onclick="pickPhoto(3)"><div class="photo-box" id="photoBox3">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,3)">×</button><div class="photo-help">드래그로 위치 조정 후 사진 클릭하면 확정</div><div class="photo-placed-mark">배치완료</div><input class="photo-file-input" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" id="photoInput3" onchange="loadPhoto(event,3)"></td>
     </tr>
     <tr>
       <td class="caption-cell"><input class="caption-input" id="photoCaption2" value="좌측면사진" readonly></td>
       <td class="caption-cell"><input class="caption-input" id="photoCaption3" value="배면사진" readonly></td>
     </tr>
     <tr>
-      <td class="photo-cell" id="photoCell4" onclick="pickPhoto(4)"><div class="photo-box" id="photoBox4">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,4)">×</button><div class="photo-help">드래그로 위치 조정 후 사진 클릭하면 확정</div><div class="photo-placed-mark">배치완료</div><input class="photo-file-input" type="file" accept="image/*" id="photoInput4" onchange="loadPhoto(event,4)"></td>
-      <td class="photo-cell" id="photoCell5" onclick="pickPhoto(5)"><div class="photo-box" id="photoBox5">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,5)">×</button><div class="photo-help">드래그로 위치 조정 후 사진 클릭하면 확정</div><div class="photo-placed-mark">배치완료</div><input class="photo-file-input" type="file" accept="image/*" id="photoInput5" onchange="loadPhoto(event,5)"></td>
+      <td class="photo-cell" id="photoCell4" onclick="pickPhoto(4)"><div class="photo-box" id="photoBox4">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,4)">×</button><div class="photo-help">드래그로 위치 조정 후 사진 클릭하면 확정</div><div class="photo-placed-mark">배치완료</div><input class="photo-file-input" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" id="photoInput4" onchange="loadPhoto(event,4)"></td>
+      <td class="photo-cell" id="photoCell5" onclick="pickPhoto(5)"><div class="photo-box" id="photoBox5">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,5)">×</button><div class="photo-help">드래그로 위치 조정 후 사진 클릭하면 확정</div><div class="photo-placed-mark">배치완료</div><input class="photo-file-input" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" id="photoInput5" onchange="loadPhoto(event,5)"></td>
     </tr>
     <tr>
       <td class="caption-cell"><input class="caption-input" id="photoCaption4" value=""></td>
@@ -4070,24 +4089,24 @@
   <div class="photo-page-title">■ 현황 및 점검 사진(추가 사진 첨부가능)</div>
   <table class="photo-page-table">
     <tr>
-      <td class="photo-cell" id="photoCell6" onclick="pickPhoto(6)"><div class="photo-box" id="photoBox6">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,6)">×</button><input class="photo-file-input" type="file" accept="image/*" id="photoInput6" onchange="loadPhoto(event,6)"></td>
-      <td class="photo-cell" id="photoCell7" onclick="pickPhoto(7)"><div class="photo-box" id="photoBox7">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,7)">×</button><input class="photo-file-input" type="file" accept="image/*" id="photoInput7" onchange="loadPhoto(event,7)"></td>
+      <td class="photo-cell" id="photoCell6" onclick="pickPhoto(6)"><div class="photo-box" id="photoBox6">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,6)">×</button><input class="photo-file-input" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" id="photoInput6" onchange="loadPhoto(event,6)"></td>
+      <td class="photo-cell" id="photoCell7" onclick="pickPhoto(7)"><div class="photo-box" id="photoBox7">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,7)">×</button><input class="photo-file-input" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" id="photoInput7" onchange="loadPhoto(event,7)"></td>
     </tr>
     <tr>
       <td class="caption-cell"><input class="caption-input" id="photoCaption6" value=""></td>
       <td class="caption-cell"><input class="caption-input" id="photoCaption7" value=""></td>
     </tr>
     <tr>
-      <td class="photo-cell" id="photoCell8" onclick="pickPhoto(8)"><div class="photo-box" id="photoBox8">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,8)">×</button><input class="photo-file-input" type="file" accept="image/*" id="photoInput8" onchange="loadPhoto(event,8)"></td>
-      <td class="photo-cell" id="photoCell9" onclick="pickPhoto(9)"><div class="photo-box" id="photoBox9">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,9)">×</button><input class="photo-file-input" type="file" accept="image/*" id="photoInput9" onchange="loadPhoto(event,9)"></td>
+      <td class="photo-cell" id="photoCell8" onclick="pickPhoto(8)"><div class="photo-box" id="photoBox8">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,8)">×</button><input class="photo-file-input" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" id="photoInput8" onchange="loadPhoto(event,8)"></td>
+      <td class="photo-cell" id="photoCell9" onclick="pickPhoto(9)"><div class="photo-box" id="photoBox9">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,9)">×</button><input class="photo-file-input" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" id="photoInput9" onchange="loadPhoto(event,9)"></td>
     </tr>
     <tr>
       <td class="caption-cell"><input class="caption-input" id="photoCaption8" value=""></td>
       <td class="caption-cell"><input class="caption-input" id="photoCaption9" value=""></td>
     </tr>
     <tr>
-      <td class="photo-cell" id="photoCell10" onclick="pickPhoto(10)"><div class="photo-box" id="photoBox10">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,10)">×</button><input class="photo-file-input" type="file" accept="image/*" id="photoInput10" onchange="loadPhoto(event,10)"></td>
-      <td class="photo-cell" id="photoCell11" onclick="pickPhoto(11)"><div class="photo-box" id="photoBox11">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,11)">×</button><input class="photo-file-input" type="file" accept="image/*" id="photoInput11" onchange="loadPhoto(event,11)"></td>
+      <td class="photo-cell" id="photoCell10" onclick="pickPhoto(10)"><div class="photo-box" id="photoBox10">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,10)">×</button><input class="photo-file-input" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" id="photoInput10" onchange="loadPhoto(event,10)"></td>
+      <td class="photo-cell" id="photoCell11" onclick="pickPhoto(11)"><div class="photo-box" id="photoBox11">사진 클릭 후 선택</div><button type="button" class="photo-delete-btn" onclick="deletePhoto(event,11)">×</button><input class="photo-file-input" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" id="photoInput11" onchange="loadPhoto(event,11)"></td>
     </tr>
     <tr>
       <td class="caption-cell"><input class="caption-input" id="photoCaption10" value=""></td>
@@ -4273,12 +4292,12 @@ function saveForm(showAlert=true){
     if(box && box.dataset.image) data["photoData_" + i] = box.dataset.image;
     if(cap) data["photoCaption_" + i] = cap.value;
   }
-  localStorage.setItem("safetyFieldSendAppPWA_V97", JSON.stringify(data));
+  localStorage.setItem("safetyFieldSendAppPWA_V99", JSON.stringify(data));
   if(showAlert) alert("입력값을 저장했습니다.");
 }
 
 function loadForm(){
-  const raw = localStorage.getItem("safetyFieldSendAppPWA_V97");
+  const raw = localStorage.getItem("safetyFieldSendAppPWA_V99");
   if(!raw) return;
   const data = JSON.parse(raw);
   if(data["districtText"]) document.getElementById("district").innerText = data["districtText"];
@@ -4340,7 +4359,7 @@ function fillSample(){
 
 function clearForm(){
   if(confirm("입력값을 모두 초기화할까요?")){
-    localStorage.removeItem("safetyFieldSendAppPWA_V97");
+    localStorage.removeItem("safetyFieldSendAppPWA_V99");
     location.reload();
   }
 }
@@ -4376,7 +4395,30 @@ function updatePage4PrintVisibility(){
   }
 }
 
-function pickPhoto(i){
+async function pickPhoto(i){
+  if(window.showOpenFilePicker){
+    try{
+      const [handle] = await window.showOpenFilePicker({
+        multiple:false,
+        excludeAcceptAllOption:false,
+        types:[{
+          description:"기기 사진",
+          accept:{
+            "image/jpeg":[".jpg",".jpeg"],
+            "image/png":[".png"],
+            "image/webp":[".webp"],
+            "image/heic":[".heic"],
+            "image/heif":[".heif"]
+          }
+        }]
+      });
+      const file = await handle.getFile();
+      await loadPhotoFile(file, i);
+      return;
+    }catch(err){
+      if(err && err.name === "AbortError") return;
+    }
+  }
   const input = document.getElementById("photoInput" + i);
   if(input) input.click();
 }
@@ -4386,8 +4428,6 @@ function renderPhoto(i, src){
   const cell = document.getElementById("photoCell" + i);
   if(!box) return;
 
-  // 사진은 압축/리사이즈하지 않고 원본 데이터를 그대로 불러옵니다.
-  // 표 안에서는 object-fit: cover로 비율을 유지한 채 꽉 채우므로 사진이 찌그러지지 않습니다.
   box.innerHTML = `<div class="photo-inner"><img class="auto-fit-photo" id="photoImg${i}" src="${src}" alt="점검사진${i+1}" onerror="this.closest('.photo-box').innerHTML='사진을 불러오지 못했습니다';"></div>`;
   box.dataset.image = src;
 
@@ -4397,24 +4437,32 @@ function renderPhoto(i, src){
   }
 }
 
+function loadPhotoFile(file, i){
+  return new Promise((resolve) => {
+    if(!file){ resolve(); return; }
+    const reader = new FileReader();
+    reader.onload = function(e){
+      renderPhoto(i, e.target.result);
+
+      const caption = document.getElementById("photoCaption" + i);
+      if(caption && !caption.readOnly && !caption.value.trim()){
+        caption.value = file.name.replace(/\.[^.]+$/, "");
+      }
+
+      updatePage4PrintVisibility();
+      saveForm(false);
+      resolve();
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
 function loadPhoto(event, i){
   const file = event.target.files && event.target.files[0];
   if(!file) return;
-
-  const reader = new FileReader();
-  reader.onload = function(e){
-    renderPhoto(i, e.target.result);
-
-    const caption = document.getElementById("photoCaption" + i);
-    if(caption && !caption.readOnly && !caption.value.trim()){
-      caption.value = file.name.replace(/\.[^.]+$/, "");
-    }
-
+  loadPhotoFile(file, i).then(() => {
     event.target.value = "";
-    updatePage4PrintVisibility();
-    saveForm(false);
-  };
-  reader.readAsDataURL(file);
+  });
 }
 
 function deletePhoto(event, i){

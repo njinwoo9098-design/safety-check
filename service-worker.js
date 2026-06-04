@@ -1,14 +1,14 @@
-
-const CACHE_NAME = "safety-field-send-pwa-v97";
+const CACHE_NAME = "safety-field-send-pwa-v99";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
+  "./service-worker.js",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
-  "assets/건축사사무소 개설신고확인증.pdf",
-  "assets/건축사자격증.jpg",
-  "assets/사업자등록증.jpg"
+  "./assets/건축사사무소개설신고확인증.pdf",
+  "./assets/건축사자격증.jpg",
+  "./assets/사업자등록증.jpg"
 ];
 
 self.addEventListener("install", (event) => {
