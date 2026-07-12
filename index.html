@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>외도민 안전점검표 현장발송앱 PWA v109</title>
+<title>외도민 안전점검표 현장발송앱 PWA v113</title>
 <style>
   :root{
     --line:#111;
@@ -3800,6 +3800,113 @@
     box-sizing:border-box!important;
   }
 
+
+  /* v110: 서명란 도장 이미지 17mm 인쇄 */
+  .overview-clean .signature-line-cell{
+    overflow:visible!important;
+  }
+  .signature-box{
+    position:relative!important;
+    overflow:visible!important;
+  }
+  .signature-box .seal-img{
+    position:absolute!important;
+    left:50%!important;
+    top:50%!important;
+    width:17mm!important;
+    height:17mm!important;
+    max-width:17mm!important;
+    max-height:17mm!important;
+    transform:translate(-50%, -50%)!important;
+    object-fit:contain!important;
+    border-radius:50%!important;
+    z-index:5!important;
+    pointer-events:none!important;
+  }
+  .signature-box.seal-signed{
+    color:transparent!important;
+    border-bottom:0!important;
+  }
+  @media print{
+    .signature-box .seal-img{
+      width:17mm!important;
+      height:17mm!important;
+      max-width:17mm!important;
+      max-height:17mm!important;
+      -webkit-print-color-adjust:exact!important;
+      print-color-adjust:exact!important;
+    }
+  }
+
+
+  /* v112: 점검자 첫번째 서명란 도장 고정 */
+  .signature-box.fixed-seal-box{
+    cursor:default!important;
+    position:relative!important;
+    overflow:visible!important;
+    color:transparent!important;
+  }
+  .signature-box.fixed-seal-box .seal-img{
+    position:absolute!important;
+    left:50%!important;
+    top:50%!important;
+    width:17mm!important;
+    height:17mm!important;
+    max-width:17mm!important;
+    max-height:17mm!important;
+    transform:translate(-50%, -50%)!important;
+    object-fit:contain!important;
+    border-radius:50%!important;
+    pointer-events:none!important;
+  }
+
+
+  /* v113: 도장이 조사일시 날짜를 가리지 않도록 아래 방향으로 고정 */
+  .signature-box.fixed-seal-box .seal-img{
+    top:0!important;
+    transform:translateX(-50%)!important;
+  }
+
+
+  /* v113: 사용승인일 '없음' 선택 */
+  .approval-date-wrap{
+    display:flex!important;
+    align-items:center!important;
+    gap:1mm!important;
+    width:100%!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+  }
+  .approval-date-wrap #approvalDate{
+    flex:1 1 auto!important;
+    min-width:0!important;
+    width:auto!important;
+    box-sizing:border-box!important;
+  }
+  .approval-none-btn{
+    flex:0 0 auto!important;
+    border:1px solid #94a3b8!important;
+    background:#f8fafc!important;
+    color:#111!important;
+    border-radius:4px!important;
+    padding:1.2mm 1.6mm!important;
+    font-size:8pt!important;
+    font-weight:700!important;
+    cursor:pointer!important;
+    line-height:1!important;
+  }
+  @media print{
+    .approval-none-btn{
+      display:none!important;
+    }
+    .approval-date-wrap{
+      display:block!important;
+    }
+    .approval-date-wrap #approvalDate{
+      width:100%!important;
+    }
+  }
+
 </style>
 
 <link rel="manifest" href="manifest.webmanifest">
@@ -3812,7 +3919,7 @@
 </head>
 <body>
 <div class="toolbar">
-  <strong>외도민 안전점검표 현장발송앱 PWA v109</strong>
+  <strong>외도민 안전점검표 현장발송앱 PWA v113</strong>
   <button class="primary" onclick="saveForm()">입력값 저장</button>
   <button onclick="printWithPdfTitle()">PDF 저장 / 인쇄</button>
   <button class="warn" onclick="fillSample()">샘플값 입력</button>
@@ -3910,10 +4017,10 @@
       <th>용도</th>
       <td><input type="text" id="useType" placeholder="용도를 직접 입력"></td>
       <th>사용승인일</th>
-      <td><input type="date" id="approvalDate"></td>
+      <td><div class="approval-date-wrap"><input type="text" id="approvalDate" placeholder="YYYY-MM-DD 또는 없음" list="approvalDateOptions"><button type="button" class="approval-none-btn" onclick="setApprovalDateNone()">없음</button></div><datalist id="approvalDateOptions"><option value="없음"></option></datalist></td>
       <th rowspan="6">점검자</th>
       <th>성명</th>
-      <td class="signature-line-cell"><input type="text" id="inspector" class="name-input"> <span class="sign-text signature-box" id="signatureBox0" onclick="openSignaturePad(0)">(서명)</span></td>
+      <td class="signature-line-cell"><input type="text" id="inspector" class="name-input" value="박진우"> <span id="signatureBox0" class="signature-box signed seal-signed fixed-seal-box" data-signature="assets/사용인감도장_점검자서명.png" data-signature-type="seal"><img class="seal-img" src="assets/사용인감도장_점검자서명.png" alt="점검자 도장"></span></td>
     </tr>
     <tr>
       <th>관리주체</th>
@@ -4107,7 +4214,7 @@
       <td class="detail-cell"><textarea id="detail_15"></textarea></td>
     </tr>
   </table>
-  <div class="footer-memo">※ 첫째장 입력형 / 현장발송앱 PWA v109</div>
+  <div class="footer-memo">※ 첫째장 입력형 / 현장발송앱 PWA v113</div>
 </section>
 
 <section class="page" id="page2">
@@ -4368,7 +4475,9 @@
     <div class="signature-canvas-wrap">
       <canvas id="signatureCanvas"></canvas>
     </div>
+    <input id="sealFileInput" type="file" accept="image/*,.jpg,.jpeg,.png,.webp" style="display:none" onchange="loadSealFile(event)">
     <div class="signature-actions">
+      <button type="button" onclick="document.getElementById('sealFileInput').click()">도장 이미지 적용<br><span style="font-size:11px;font-weight:600;">인쇄 지름 17mm</span></button>
       <button type="button" onclick="clearSignaturePad()">지우기</button>
       <button type="button" onclick="closeSignaturePad()">닫기</button>
       <button type="button" class="primary" onclick="saveSignaturePad()">서명 적용</button>
@@ -4378,6 +4487,19 @@
 
 
 <script>
+
+
+const FIXED_INSPECTOR_SEAL_SRC = "assets/사용인감도장_점검자서명.png";
+function ensureFixedInspectorSeal(){
+  const box = document.getElementById("signatureBox0");
+  if(!box) return;
+  box.className = "signature-box signed seal-signed fixed-seal-box";
+  box.removeAttribute("onclick");
+  box.dataset.signature = FIXED_INSPECTOR_SEAL_SRC;
+  box.dataset.signatureType = "seal";
+  box.innerHTML = `<img class="seal-img" src="${FIXED_INSPECTOR_SEAL_SRC}" alt="점검자 도장">`;
+}
+
 const mainRows = [
   {cat:"주요", item:"① 건축물의 기울음 여부", def:"상"},
   {cat:"주요", item:"② 주변지반 부분침하, 융기현상, 균열 발생 여부", def:"중"},
@@ -4424,6 +4546,22 @@ function setSingleCheckboxBehavior(){
   });
 }
 
+
+function setApprovalDateNone(){
+  const el = document.getElementById("approvalDate");
+  if(el){
+    el.value = "없음";
+    saveForm(false);
+  }
+}
+
+function setDefaultInspectorName(){
+  const el = document.getElementById("inspector");
+  if(el && !String(el.value || "").trim()){
+    el.value = "박진우";
+  }
+}
+
 function resizeDistrictInput(){
   const el = document.getElementById("district");
   const text = (el.innerText || "마포구").trim();
@@ -4451,7 +4589,10 @@ function collectFormData(includePhotos=true){
 
   for(let i=0;i<2;i++){
     const sig = document.getElementById("signatureBox" + i);
-    if(sig && sig.dataset.signature) data["signatureData_" + i] = sig.dataset.signature;
+    if(sig && sig.dataset.signature){
+      data["signatureData_" + i] = sig.dataset.signature;
+      data["signatureType_" + i] = sig.dataset.signatureType || "signature";
+    }
   }
 
   for(let i=0;i<12;i++){
@@ -4498,9 +4639,9 @@ function loadForm(){
   const candidateKeys = [
     STABLE_STORAGE_KEY,
     VERSION_STORAGE_KEY,
-    "safetyFieldSendAppPWA_V109",
-    "safetyFieldSendAppPWA_V109",
-    "safetyFieldSendAppPWA_V109",
+    "safetyFieldSendAppPWA_V113",
+    "safetyFieldSendAppPWA_V113",
+    "safetyFieldSendAppPWA_V113",
     "safetyFieldSendAppPWA_V98",
     "safetyFieldSendAppPWA_V97",
     "safetyFieldSendAppV96",
@@ -4527,8 +4668,10 @@ function loadForm(){
 
   for(let i=0;i<2;i++){
     if(data["signatureData_" + i]){
-      applySignature(i, data["signatureData_" + i]);
+      const sigType = data["signatureType_" + i] || localStorage.getItem("signatureType_" + i) || "signature";
+      applySignature(i, data["signatureData_" + i], sigType);
       localStorage.setItem("signatureData_" + i, data["signatureData_" + i]);
+      localStorage.setItem("signatureType_" + i, sigType);
     }
   }
 
@@ -4571,9 +4714,9 @@ function clearForm(){
     [
       STABLE_STORAGE_KEY,
       VERSION_STORAGE_KEY,
-      "safetyFieldSendAppPWA_V109",
-      "safetyFieldSendAppPWA_V109",
-      "safetyFieldSendAppPWA_V109",
+      "safetyFieldSendAppPWA_V113",
+      "safetyFieldSendAppPWA_V113",
+      "safetyFieldSendAppPWA_V113",
       "safetyFieldSendAppPWA_V98",
       "safetyFieldSendAppPWA_V97",
       "safetyFieldSendAppV96",
@@ -4616,7 +4759,7 @@ function fillSample(){
 
 function clearForm(){
   if(confirm("입력값을 모두 초기화할까요?")){
-    localStorage.removeItem("safetyFieldSendAppPWA_V109");
+    localStorage.removeItem("safetyFieldSendAppPWA_V113");
     location.reload();
   }
 }
@@ -4928,13 +5071,15 @@ function signaturePoint(e){
 }
 
 function openSignaturePad(index){
+  if(index === 0){ ensureFixedInspectorSeal(); return; }
   currentSignatureIndex = index;
   const modal = document.getElementById("signatureModal");
   if(modal) modal.style.display = "flex";
   setTimeout(() => {
     setupSignatureCanvas();
     const saved = localStorage.getItem("signatureData_" + index);
-    if(saved){
+    const savedType = localStorage.getItem("signatureType_" + index) || "signature";
+    if(saved && savedType === "signature"){
       const canvas = document.getElementById("signatureCanvas");
       const ctx = signatureCtx;
       const img = new Image();
@@ -4962,9 +5107,12 @@ function clearSignaturePad(){
   // 지우기 후 닫기하면 기존 서명 대신 다시 (서명)이 보이도록 즉시 초기화
   if(currentSignatureIndex !== null){
     localStorage.removeItem("signatureData_" + currentSignatureIndex);
+    localStorage.removeItem("signatureType_" + currentSignatureIndex);
     const box = document.getElementById("signatureBox" + currentSignatureIndex);
     if(box){
       box.classList.remove("signed");
+    box.classList.remove("seal-signed");
+      box.classList.remove("seal-signed");
       box.style.backgroundImage = "";
       box.style.background = "";
       box.style.color = "";
@@ -4980,26 +5128,93 @@ function saveSignaturePad(){
   const canvas = document.getElementById("signatureCanvas");
   if(!canvas) return;
   const data = canvas.toDataURL("image/png");
-  applySignature(currentSignatureIndex, data);
+  applySignature(currentSignatureIndex, data, "signature");
   localStorage.setItem("signatureData_" + currentSignatureIndex, data);
+  localStorage.setItem("signatureType_" + currentSignatureIndex, "signature");
   saveForm(false);
   closeSignaturePad();
 }
 
-function applySignature(index, data){
+function applySignature(index, data, type="signature"){
   const box = document.getElementById("signatureBox" + index);
   if(!box || !data) return;
+
   box.classList.add("signed");
   box.style.backgroundImage = "";
   box.style.background = "none";
   box.style.filter = "none";
   box.style.color = "transparent";
-  box.innerHTML = `<img class="signature-img" src="${data}" alt="서명">`;
   box.dataset.signature = data;
+  box.dataset.signatureType = type;
+
+  if(type === "seal"){
+    box.classList.add("seal-signed");
+    box.innerHTML = `<img class="seal-img" src="${data}" alt="도장">`;
+  }else{
+    box.classList.remove("seal-signed");
+    box.innerHTML = `<img class="signature-img" src="${data}" alt="서명">`;
+  }
+}
+
+function loadSealFile(event){
+  if(currentSignatureIndex === null || currentSignatureIndex === undefined){
+    alert("도장을 넣을 서명란을 먼저 선택해 주세요.");
+    return;
+  }
+
+  const file = event.target.files && event.target.files[0];
+  if(!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e){
+    const originalData = e.target.result;
+    const img = new Image();
+
+    img.onload = function(){
+      try{
+        const maxSide = 900;
+        let w = img.naturalWidth || img.width;
+        let h = img.naturalHeight || img.height;
+        const ratio = Math.min(1, maxSide / Math.max(w, h));
+
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.max(1, Math.round(w * ratio));
+        canvas.height = Math.max(1, Math.round(h * ratio));
+
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        const data = canvas.toDataURL("image/png");
+        applySignature(currentSignatureIndex, data, "seal");
+        localStorage.setItem("signatureData_" + currentSignatureIndex, data);
+        localStorage.setItem("signatureType_" + currentSignatureIndex, "seal");
+        saveForm(false);
+        closeSignaturePad();
+      }catch(err){
+        applySignature(currentSignatureIndex, originalData, "seal");
+        localStorage.setItem("signatureData_" + currentSignatureIndex, originalData);
+        localStorage.setItem("signatureType_" + currentSignatureIndex, "seal");
+        saveForm(false);
+        closeSignaturePad();
+      }
+    };
+
+    img.onerror = function(){
+      alert("도장 이미지를 불러오지 못했습니다. JPG 또는 PNG 파일로 다시 선택해 주세요.");
+    };
+
+    img.src = originalData;
+  };
+
+  reader.readAsDataURL(file);
+  event.target.value = "";
 }
 
 function deleteSavedSignature(index){
+  if(index === 0){ ensureFixedInspectorSeal(); return; }
   localStorage.removeItem("signatureData_" + index);
+  localStorage.removeItem("signatureType_" + index);
   const box = document.getElementById("signatureBox" + index);
   if(box){
     box.classList.remove("signed");
@@ -5048,7 +5263,8 @@ function initSignatureEvents(){
 function restoreSignatures(){
   for(let i=0;i<2;i++){
     const saved = localStorage.getItem("signatureData_" + i);
-    if(saved) applySignature(i, saved);
+    const sigType = localStorage.getItem("signatureType_" + i) || "signature";
+    if(saved) applySignature(i, saved, sigType);
   }
 }
 
@@ -5187,7 +5403,7 @@ document.addEventListener("change", (e) => {
 
 
 const STABLE_STORAGE_KEY = "mukjulSafetyInspectionCurrentData";
-const VERSION_STORAGE_KEY = "safetyFieldSendAppPWA_V109";
+const VERSION_STORAGE_KEY = "safetyFieldSendAppPWA_V113";
 
 function formatKoreanDateForFile(dateValue){
   if(!dateValue) return "";
@@ -5613,16 +5829,20 @@ window.addEventListener("load", () => {
     document.getElementById("inspectDate").value = new Date().toISOString().slice(0,10);
   }
   loadForm();
+  setDefaultInspectorName();
   resizeDistrictInput();
   autoCopyInspector();
   calculateInspectionGrade();
   initSignatureEvents();
   restoreSignatures();
+  ensureFixedInspectorSeal();
+  ensureFixedInspectorSeal();
   syncPrintStatusSpans();
   updatePrecisionRequirementByGrade();
   calculateInspectionGrade();
   syncFieldSendPanelToPage1();
   updatePdfDocumentTitle();
+  saveForm(false);
 });
 </script>
 <script>
