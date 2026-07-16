@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>외도민 안전점검표 현장발송앱 PWA v131-iPad</title>
+<title>외도민 안전점검표 현장발송앱 PWA v132-iPad</title>
 <style>
   :root{
     --line:#111;
@@ -3914,7 +3914,7 @@
   }
 
 
-  /* v131-iPad: 아이패드 Safari PDF 인쇄 안정화 모드 */
+  /* v132-iPad: 아이패드 Safari PDF 인쇄 안정화 모드 */
   @media print{
     body.ipad-pdf-mode,
     body.ipad-pdf-mode html{
@@ -4029,7 +4029,7 @@
   }
 
 
-  /* v131-iPad: 아이패드 PDF 인쇄 사진표/사진 출력 보정 */
+  /* v132-iPad: 아이패드 PDF 인쇄 사진표/사진 출력 보정 */
   @media print{
     body.ipad-pdf-mode #page3 .photo-page-table,
     body.ipad-pdf-mode #page4 .photo-page-table{
@@ -4146,7 +4146,7 @@
   }
 
 
-  /* v131-iPad: 아이패드 사진 여백 3mm + 빈 페이지 방지 보정 */
+  /* v132-iPad: 아이패드 사진 여백 3mm + 빈 페이지 방지 보정 */
   @media print{
     body.ipad-pdf-mode #page3,
     body.ipad-pdf-mode #page4{
@@ -4284,7 +4284,7 @@
   }
 
 
-  /* v131-iPad: 공통 세로 A4 + 아이패드 출력 여백/사진/빈페이지 보정 */
+  /* v132-iPad: 공통 세로 A4 + 아이패드 출력 여백/사진/빈페이지 보정 */
   @page{
     size:210mm 297mm;
     margin:0;
@@ -4533,7 +4533,7 @@
 </head>
 <body>
 <div class="toolbar">
-  <strong>외도민 안전점검표 현장발송앱 PWA v131-iPad</strong>
+  <strong>외도민 안전점검표 현장발송앱 PWA v132-iPad</strong>
   <button class="primary" onclick="saveForm()">입력값 저장</button>
   <button onclick="printWithPdfTitle()">PDF 저장 / 인쇄</button>
   <button onclick="printIpadPdf()">아이패드 PDF 인쇄</button>
@@ -4590,7 +4590,7 @@
     <button onclick="downloadBuiltInCerts()">자격증명 3종 다운로드</button>
   </div>
   <div class="send-note">
-    사용 순서: <b>PDF 저장 / 인쇄</b>로 안전점검표 PDF를 만든 뒤, 반드시 위의 “완성된 안전점검표 PDF 선택(필수)”에 그 PDF를 선택하세요. 아이패드에서는 일반 PDF 저장 대신 <b>아이패드 PDF 인쇄</b> 버튼을 사용하세요. 아이패드는 210mm×297mm 크기의 별도 인쇄문서를 만들어 안드로이드 출력 결과와 최대한 동일하게 인쇄되도록 보정했습니다. 아이패드는 210mm×297mm 크기의 별도 인쇄문서를 만들어 안드로이드 출력 결과와 최대한 동일하게 인쇄되도록 보정했습니다. PDF를 선택하지 않으면 카카오톡/이메일에 안전점검표가 첨부되지 않습니다.
+    사용 순서: <b>PDF 저장 / 인쇄</b>로 안전점검표 PDF를 만든 뒤, 반드시 위의 “완성된 안전점검표 PDF 선택(필수)”에 그 PDF를 선택하세요. 아이패드에서는 일반 PDF 저장 대신 <b>아이패드 PDF 인쇄</b> 버튼을 사용하세요. 아이패드는 별도 PDF를 직접 생성하므로 하단 GitHub 주소와 작성날짜는 나오지 않고, 페이지번호만 표시됩니다. 아이패드는 별도 PDF를 직접 생성하므로 하단 GitHub 주소와 작성날짜는 나오지 않고, 페이지번호만 표시됩니다. PDF를 선택하지 않으면 카카오톡/이메일에 안전점검표가 첨부되지 않습니다.
     <b>카카오톡 보내기</b>는 발송내용과 PDF·자격증명 서류를 공유창으로 준비하며, 최종 발송은 카카오톡에서 직접 선택합니다. 개설신고확인증과 건축사자격증 사본에는 신청주소 기준 제출용 문구가 빨간 박스로 자동 표시됩니다.
     <b>이메일 보내기</b>는 네이버메일 또는 G메일 메일쓰기 화면을 열고 받는사람·제목·본문을 준비합니다. 최종 발송은 직접 확인 후 누르시면 됩니다.
   </div>
@@ -4830,7 +4830,7 @@
       <td class="detail-cell"><textarea id="detail_15"></textarea></td>
     </tr>
   </table>
-  <div class="footer-memo">※ 첫째장 입력형 / 현장발송앱 PWA v131-iPad</div>
+  <div class="footer-memo">※ 첫째장 입력형 / 현장발송앱 PWA v132-iPad</div>
 </section>
 
 <section class="page" id="page2">
@@ -5255,9 +5255,9 @@ function loadForm(){
   const candidateKeys = [
     STABLE_STORAGE_KEY,
     VERSION_STORAGE_KEY,
-    "safetyFieldSendAppPWA_V131_IPAD",
-    "safetyFieldSendAppPWA_V131_IPAD",
-    "safetyFieldSendAppPWA_V131_IPAD",
+    "safetyFieldSendAppPWA_V132_IPAD",
+    "safetyFieldSendAppPWA_V132_IPAD",
+    "safetyFieldSendAppPWA_V132_IPAD",
     "safetyFieldSendAppPWA_V98",
     "safetyFieldSendAppPWA_V97",
     "safetyFieldSendAppV96",
@@ -5330,9 +5330,9 @@ function clearForm(){
     [
       STABLE_STORAGE_KEY,
       VERSION_STORAGE_KEY,
-      "safetyFieldSendAppPWA_V131_IPAD",
-      "safetyFieldSendAppPWA_V131_IPAD",
-      "safetyFieldSendAppPWA_V131_IPAD",
+      "safetyFieldSendAppPWA_V132_IPAD",
+      "safetyFieldSendAppPWA_V132_IPAD",
+      "safetyFieldSendAppPWA_V132_IPAD",
       "safetyFieldSendAppPWA_V98",
       "safetyFieldSendAppPWA_V97",
       "safetyFieldSendAppV96",
@@ -5375,7 +5375,7 @@ function fillSample(){
 
 function clearForm(){
   if(confirm("입력값을 모두 초기화할까요?")){
-    localStorage.removeItem("safetyFieldSendAppPWA_V131_IPAD");
+    localStorage.removeItem("safetyFieldSendAppPWA_V132_IPAD");
     location.reload();
   }
 }
@@ -6019,7 +6019,7 @@ document.addEventListener("change", (e) => {
 
 
 const STABLE_STORAGE_KEY = "mukjulSafetyInspectionCurrentData";
-const VERSION_STORAGE_KEY = "safetyFieldSendAppPWA_V131_IPAD";
+const VERSION_STORAGE_KEY = "safetyFieldSendAppPWA_V132_IPAD";
 
 function formatKoreanDateForFile(dateValue){
   if(!dateValue) return "";
@@ -6623,62 +6623,306 @@ function waitForIframeImages(doc, timeoutMs=4500){
   });
 }
 
+
+function showIpadPdfStatus(message){
+  let el = document.getElementById("ipadPdfBuildStatus");
+  if(!el){
+    el = document.createElement("div");
+    el.id = "ipadPdfBuildStatus";
+    Object.assign(el.style, {
+      position:"fixed", left:"50%", top:"50%", transform:"translate(-50%,-50%)",
+      zIndex:"99999", padding:"16px 20px", borderRadius:"12px",
+      background:"rgba(15,23,42,.94)", color:"#fff", fontSize:"15px",
+      fontWeight:"800", lineHeight:"1.5", textAlign:"center",
+      boxShadow:"0 8px 30px rgba(0,0,0,.35)", display:"none"
+    });
+    document.body.appendChild(el);
+  }
+  el.textContent = message || "";
+  el.style.display = message ? "block" : "none";
+}
+
+function bytesFromDataUrl(dataUrl){
+  const comma = dataUrl.indexOf(",");
+  if(comma < 0) throw new Error("잘못된 이미지 데이터입니다.");
+  const binary = atob(dataUrl.slice(comma + 1));
+  const bytes = new Uint8Array(binary.length);
+  for(let i=0;i<binary.length;i++) bytes[i] = binary.charCodeAt(i);
+  return bytes;
+}
+
+function concatPdfBytes(parts){
+  const total = parts.reduce((sum, part) => sum + part.length, 0);
+  const out = new Uint8Array(total);
+  let offset = 0;
+  parts.forEach(part => {
+    out.set(part, offset);
+    offset += part.length;
+  });
+  return out;
+}
+
+function buildJpegPdfWithPageNumbers(images){
+  if(!images.length) throw new Error("PDF로 만들 페이지가 없습니다.");
+
+  const encoder = new TextEncoder();
+  const chunks = [];
+  const offsets = [];
+  let byteLength = 0;
+
+  const appendText = (text) => {
+    const bytes = encoder.encode(text);
+    chunks.push(bytes);
+    byteLength += bytes.length;
+  };
+  const appendBytes = (bytes) => {
+    chunks.push(bytes);
+    byteLength += bytes.length;
+  };
+  const beginObject = (id) => {
+    offsets[id] = byteLength;
+    appendText(`${id} 0 obj\n`);
+  };
+  const endObject = () => appendText(`\nendobj\n`);
+
+  const count = images.length;
+  const fontId = 3 + count * 3;
+  const objectCount = fontId;
+  const pageIds = images.map((_, i) => 3 + i * 3);
+
+  appendText("%PDF-1.4\n");
+
+  beginObject(1);
+  appendText("<< /Type /Catalog /Pages 2 0 R >>");
+  endObject();
+
+  beginObject(2);
+  appendText(`<< /Type /Pages /Count ${count} /Kids [${pageIds.map(id => `${id} 0 R`).join(" ")}] >>`);
+  endObject();
+
+  const pageWidth = 595.28;
+  const pageHeight = 841.89;
+  const footerHeight = 13.5;
+  const imageHeight = pageHeight - footerHeight;
+
+  images.forEach((item, index) => {
+    const pageId = 3 + index * 3;
+    const imageId = pageId + 1;
+    const contentId = pageId + 2;
+    const jpegBytes = bytesFromDataUrl(item.dataUrl);
+
+    beginObject(pageId);
+    appendText(
+      `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${pageWidth.toFixed(2)} ${pageHeight.toFixed(2)}] ` +
+      `/Resources << /XObject << /Im0 ${imageId} 0 R >> /Font << /F1 ${fontId} 0 R >> >> ` +
+      `/Contents ${contentId} 0 R >>`
+    );
+    endObject();
+
+    beginObject(imageId);
+    appendText(
+      `<< /Type /XObject /Subtype /Image /Width ${item.width} /Height ${item.height} ` +
+      `/ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${jpegBytes.length} >>\nstream\n`
+    );
+    appendBytes(jpegBytes);
+    appendText("\nendstream");
+    endObject();
+
+    const pageNumber = `${index + 1} / ${count}`;
+    const content =
+      `q\n${pageWidth.toFixed(2)} 0 0 ${imageHeight.toFixed(2)} 0 ${footerHeight.toFixed(2)} cm\n/Im0 Do\nQ\n` +
+      `BT\n/F1 7 Tf\n0 g\n1 0 0 1 ${(pageWidth / 2 - pageNumber.length * 1.7).toFixed(2)} 4 Td\n(${pageNumber}) Tj\nET`;
+    const contentBytes = encoder.encode(content);
+
+    beginObject(contentId);
+    appendText(`<< /Length ${contentBytes.length} >>\nstream\n`);
+    appendBytes(contentBytes);
+    appendText("\nendstream");
+    endObject();
+  });
+
+  beginObject(fontId);
+  appendText("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>");
+  endObject();
+
+  const xrefOffset = byteLength;
+  appendText(`xref\n0 ${objectCount + 1}\n`);
+  appendText("0000000000 65535 f \n");
+  for(let id=1; id<=objectCount; id++){
+    appendText(`${String(offsets[id] || 0).padStart(10, "0")} 00000 n \n`);
+  }
+  appendText(
+    `trailer\n<< /Size ${objectCount + 1} /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF`
+  );
+
+  return new Blob([concatPdfBytes(chunks)], {type:"application/pdf"});
+}
+
+function blobToInlineDataUrl(blob){
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
+async function inlineImagesForIpadPdf(root, baseHref){
+  const imgs = Array.from(root.querySelectorAll("img"));
+  for(const img of imgs){
+    const src = img.getAttribute("src") || "";
+    if(!src || src.startsWith("data:")) continue;
+    try{
+      const absolute = new URL(src, baseHref).href;
+      const response = await fetch(absolute, {cache:"force-cache"});
+      if(!response.ok) throw new Error("이미지 불러오기 실패");
+      img.setAttribute("src", await blobToInlineDataUrl(await response.blob()));
+    }catch(err){
+      console.warn("PDF 이미지 인라인 처리 제외:", err);
+    }
+  }
+}
+
+function getIpadPdfRenderCss(printCss){
+  return `${printCss}\n
+    @page{size:210mm 297mm;margin:0!important;}
+    html,body{width:210mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;margin:0!important;padding:0!important;overflow:hidden!important;background:#fff!important;}
+    body{display:block!important;}
+    .page.ipad-print-page{
+      display:block!important;position:relative!important;
+      width:210mm!important;min-width:210mm!important;max-width:210mm!important;
+      height:297mm!important;min-height:297mm!important;max-height:297mm!important;
+      margin:0!important;box-shadow:none!important;overflow:hidden!important;
+      page-break-after:auto!important;break-after:auto!important;
+      transform:none!important;-webkit-transform:none!important;
+      box-sizing:border-box!important;
+    }
+    .custom-print-page-number{display:none!important;}
+  `;
+}
+
+async function renderIpadPageToJpeg(page, styleText, pageIndex){
+  const rect = page.getBoundingClientRect();
+  const width = Math.max(1, Math.ceil(rect.width));
+  const height = Math.max(1, Math.ceil(rect.height));
+  const clone = page.cloneNode(true);
+  await inlineImagesForIpadPdf(clone, location.href);
+
+  clone.style.margin = "0";
+  clone.style.boxShadow = "none";
+  clone.style.transform = "none";
+  clone.style.webkitTransform = "none";
+
+  const serialized = new XMLSerializer().serializeToString(clone);
+  const xhtml = `<html xmlns="http://www.w3.org/1999/xhtml"><head><meta charset="UTF-8"/><style>${styleText}</style></head><body>${serialized}</body></html>`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><foreignObject x="0" y="0" width="100%" height="100%">${xhtml}</foreignObject></svg>`;
+  const svgUrl = URL.createObjectURL(new Blob([svg], {type:"image/svg+xml;charset=utf-8"}));
+
+  try{
+    const image = new Image();
+    await new Promise((resolve, reject) => {
+      const timer = setTimeout(() => reject(new Error("페이지 이미지 변환 시간 초과")), 7000);
+      image.onload = () => { clearTimeout(timer); resolve(); };
+      image.onerror = () => { clearTimeout(timer); reject(new Error("페이지 이미지 변환 실패")); };
+      image.src = svgUrl;
+    });
+
+    const scale = isIOSLikeDevice() ? 1.5 : 1.8;
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(width * scale);
+    canvas.height = Math.round(height * scale);
+    const ctx = canvas.getContext("2d", {alpha:false});
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+    return {
+      dataUrl: canvas.toDataURL("image/jpeg", 0.92),
+      width: canvas.width,
+      height: canvas.height,
+      pageIndex
+    };
+  }finally{
+    URL.revokeObjectURL(svgUrl);
+  }
+}
+
 async function printIpadPdf(){
   updatePdfDocumentTitle();
   saveForm(false);
   syncPrintStatusSpans();
 
-  const pagesHtml = collectIpadPrintPages().join("\\n");
-  const title = buildPdfFileBaseName();
+  // 비동기 작업 후에도 새 창이 차단되지 않도록 클릭 즉시 미리 열어둡니다.
+  const previewWindow = window.open("", "_blank");
+  if(previewWindow){
+    previewWindow.document.open();
+    previewWindow.document.write("<!doctype html><html><head><meta charset='utf-8'><title>안전점검표 PDF 생성 중</title></head><body style='font-family:sans-serif;padding:24px'>안전점검표 PDF를 생성하고 있습니다...</body></html>");
+    previewWindow.document.close();
+  }
 
-  let iframe = document.getElementById("ipadPrintFrame");
-  if(iframe) iframe.remove();
+  let iframe = null;
+  try{
+    showIpadPdfStatus("아이패드용 PDF 생성 준비 중...");
 
-  iframe = document.createElement("iframe");
-  iframe.id = "ipadPrintFrame";
-  iframe.style.position = "fixed";
-  iframe.style.left = "-10000px";
-  iframe.style.top = "0";
-  iframe.style.width = "210mm";
-  iframe.style.height = "297mm";
-  iframe.style.border = "0";
-  iframe.style.opacity = "0.01";
-  iframe.style.pointerEvents = "none";
-  iframe.setAttribute("aria-hidden", "true");
-  document.body.appendChild(iframe);
+    const pagesHtml = collectIpadPrintPages().join("\n");
+    const printCss = getIpadPrintCss();
+    const renderCss = getIpadPdfRenderCss(printCss);
 
-  const doc = iframe.contentDocument || iframe.contentWindow.document;
-  doc.open();
-  doc.write(`<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${title}</title>
-<style>${getIpadPrintCss()}</style>
-</head>
-<body class="ipad-render-document">
-${pagesHtml}
-</body>
-</html>`);
-  doc.close();
+    iframe = document.createElement("iframe");
+    iframe.id = "ipadPdfRenderFrame";
+    Object.assign(iframe.style, {
+      position:"fixed", left:"-10000px", top:"0",
+      width:"210mm", height:"297mm", border:"0", opacity:"0.01",
+      pointerEvents:"none"
+    });
+    document.body.appendChild(iframe);
 
-  await new Promise(resolve => setTimeout(resolve, 500));
-  await waitForIframeImages(doc, 5000);
+    const doc = iframe.contentDocument || iframe.contentWindow.document;
+    doc.open();
+    doc.write(`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>${renderCss}</style></head><body class="ipad-render-document">${pagesHtml}</body></html>`);
+    doc.close();
 
-  const cleanup = () => {
-    setTimeout(() => {
-      const f = document.getElementById("ipadPrintFrame");
-      if(f) f.remove();
-      window.removeEventListener("afterprint", cleanup);
-    }, 1400);
-  };
-  window.addEventListener("afterprint", cleanup);
+    await new Promise(resolve => setTimeout(resolve, 650));
+    await waitForIframeImages(doc, 5000);
 
-  iframe.contentWindow.focus();
-  setTimeout(() => {
-    iframe.contentWindow.print();
-  }, 600);
+    const pages = Array.from(doc.querySelectorAll(".page.ipad-print-page"));
+    if(!pages.length) throw new Error("출력할 페이지를 찾지 못했습니다.");
+
+    const rendered = [];
+    for(let i=0;i<pages.length;i++){
+      showIpadPdfStatus(`아이패드용 PDF 생성 중... ${i + 1}/${pages.length}장`);
+      rendered.push(await renderIpadPageToJpeg(pages[i], renderCss, i + 1));
+      await new Promise(resolve => setTimeout(resolve, 80));
+    }
+
+    showIpadPdfStatus("페이지번호를 넣어 PDF를 완성하는 중...");
+    const pdfBlob = buildJpegPdfWithPageNumbers(rendered);
+    const pdfUrl = URL.createObjectURL(pdfBlob);
+    const fileName = `${buildPdfFileBaseName()}.pdf`;
+
+    if(previewWindow && !previewWindow.closed){
+      previewWindow.document.title = fileName;
+      previewWindow.location.replace(pdfUrl);
+    }else{
+      const link = document.createElement("a");
+      link.href = pdfUrl;
+      link.download = fileName;
+      link.target = "_blank";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    }
+
+    setTimeout(() => URL.revokeObjectURL(pdfUrl), 120000);
+    showIpadPdfStatus("");
+  }catch(err){
+    console.error("아이패드용 PDF 생성 오류:", err);
+    showIpadPdfStatus("");
+    if(previewWindow && !previewWindow.closed) previewWindow.close();
+    alert(`아이패드용 PDF 생성 중 오류가 발생했습니다.\n원인: ${err && err.message ? err.message : err}`);
+  }finally{
+    if(iframe) iframe.remove();
+  }
 }
 
 
