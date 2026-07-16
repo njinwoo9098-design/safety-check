@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>외도민 안전점검표 현장발송앱 PWA v127-iPad</title>
+<title>외도민 안전점검표 현장발송앱 PWA v128-iPad</title>
 <style>
   :root{
     --line:#111;
@@ -3914,7 +3914,7 @@
   }
 
 
-  /* v127-iPad: 아이패드 Safari PDF 인쇄 안정화 모드 */
+  /* v128-iPad: 아이패드 Safari PDF 인쇄 안정화 모드 */
   @media print{
     body.ipad-pdf-mode,
     body.ipad-pdf-mode html{
@@ -4029,7 +4029,7 @@
   }
 
 
-  /* v127-iPad: 아이패드 PDF 인쇄 사진표/사진 출력 보정 */
+  /* v128-iPad: 아이패드 PDF 인쇄 사진표/사진 출력 보정 */
   @media print{
     body.ipad-pdf-mode #page3 .photo-page-table,
     body.ipad-pdf-mode #page4 .photo-page-table{
@@ -4146,7 +4146,7 @@
   }
 
 
-  /* v127-iPad: 아이패드 사진 여백 3mm + 빈 페이지 방지 보정 */
+  /* v128-iPad: 아이패드 사진 여백 3mm + 빈 페이지 방지 보정 */
   @media print{
     body.ipad-pdf-mode #page3,
     body.ipad-pdf-mode #page4{
@@ -4284,7 +4284,7 @@
   }
 
 
-  /* v127-iPad: 공통 세로 A4 + 아이패드 출력 여백/사진/빈페이지 보정 */
+  /* v128-iPad: 공통 세로 A4 + 아이패드 출력 여백/사진/빈페이지 보정 */
   @page{
     size:210mm 297mm;
     margin:0;
@@ -4533,7 +4533,7 @@
 </head>
 <body>
 <div class="toolbar">
-  <strong>외도민 안전점검표 현장발송앱 PWA v127-iPad</strong>
+  <strong>외도민 안전점검표 현장발송앱 PWA v128-iPad</strong>
   <button class="primary" onclick="saveForm()">입력값 저장</button>
   <button onclick="printWithPdfTitle()">PDF 저장 / 인쇄</button>
   <button onclick="printIpadPdf()">아이패드 PDF 인쇄</button>
@@ -4590,7 +4590,7 @@
     <button onclick="downloadBuiltInCerts()">자격증명 3종 다운로드</button>
   </div>
   <div class="send-note">
-    사용 순서: <b>PDF 저장 / 인쇄</b>로 안전점검표 PDF를 만든 뒤, 반드시 위의 “완성된 안전점검표 PDF 선택(필수)”에 그 PDF를 선택하세요. 아이패드에서는 일반 PDF 저장 대신 <b>아이패드 PDF 인쇄</b> 버튼을 사용하세요. 사진은 안드로이드처럼 사진틀 안쪽 약 3mm 여백만 두고 꽉 차게 인쇄되도록 보정했습니다. PDF를 선택하지 않으면 카카오톡/이메일에 안전점검표가 첨부되지 않습니다.
+    사용 순서: <b>PDF 저장 / 인쇄</b>로 안전점검표 PDF를 만든 뒤, 반드시 위의 “완성된 안전점검표 PDF 선택(필수)”에 그 PDF를 선택하세요. 아이패드에서는 일반 PDF 저장 대신 <b>아이패드 PDF 인쇄</b> 버튼을 사용하세요. 아이패드는 별도 인쇄문서를 만들어 안드로이드 출력 결과와 최대한 동일하게 인쇄되도록 보정했습니다. 아이패드는 별도 인쇄문서를 만들어 안드로이드 출력 결과와 최대한 동일하게 인쇄되도록 보정했습니다. PDF를 선택하지 않으면 카카오톡/이메일에 안전점검표가 첨부되지 않습니다.
     <b>카카오톡 보내기</b>는 발송내용과 PDF·자격증명 서류를 공유창으로 준비하며, 최종 발송은 카카오톡에서 직접 선택합니다. 개설신고확인증과 건축사자격증 사본에는 신청주소 기준 제출용 문구가 빨간 박스로 자동 표시됩니다.
     <b>이메일 보내기</b>는 네이버메일 또는 G메일 메일쓰기 화면을 열고 받는사람·제목·본문을 준비합니다. 최종 발송은 직접 확인 후 누르시면 됩니다.
   </div>
@@ -4830,7 +4830,7 @@
       <td class="detail-cell"><textarea id="detail_15"></textarea></td>
     </tr>
   </table>
-  <div class="footer-memo">※ 첫째장 입력형 / 현장발송앱 PWA v127-iPad</div>
+  <div class="footer-memo">※ 첫째장 입력형 / 현장발송앱 PWA v128-iPad</div>
 </section>
 
 <section class="page" id="page2">
@@ -5255,9 +5255,9 @@ function loadForm(){
   const candidateKeys = [
     STABLE_STORAGE_KEY,
     VERSION_STORAGE_KEY,
-    "safetyFieldSendAppPWA_V127_IPAD",
-    "safetyFieldSendAppPWA_V127_IPAD",
-    "safetyFieldSendAppPWA_V127_IPAD",
+    "safetyFieldSendAppPWA_V128_IPAD",
+    "safetyFieldSendAppPWA_V128_IPAD",
+    "safetyFieldSendAppPWA_V128_IPAD",
     "safetyFieldSendAppPWA_V98",
     "safetyFieldSendAppPWA_V97",
     "safetyFieldSendAppV96",
@@ -5330,9 +5330,9 @@ function clearForm(){
     [
       STABLE_STORAGE_KEY,
       VERSION_STORAGE_KEY,
-      "safetyFieldSendAppPWA_V127_IPAD",
-      "safetyFieldSendAppPWA_V127_IPAD",
-      "safetyFieldSendAppPWA_V127_IPAD",
+      "safetyFieldSendAppPWA_V128_IPAD",
+      "safetyFieldSendAppPWA_V128_IPAD",
+      "safetyFieldSendAppPWA_V128_IPAD",
       "safetyFieldSendAppPWA_V98",
       "safetyFieldSendAppPWA_V97",
       "safetyFieldSendAppV96",
@@ -5375,7 +5375,7 @@ function fillSample(){
 
 function clearForm(){
   if(confirm("입력값을 모두 초기화할까요?")){
-    localStorage.removeItem("safetyFieldSendAppPWA_V127_IPAD");
+    localStorage.removeItem("safetyFieldSendAppPWA_V128_IPAD");
     location.reload();
   }
 }
@@ -6019,7 +6019,7 @@ document.addEventListener("change", (e) => {
 
 
 const STABLE_STORAGE_KEY = "mukjulSafetyInspectionCurrentData";
-const VERSION_STORAGE_KEY = "safetyFieldSendAppPWA_V127_IPAD";
+const VERSION_STORAGE_KEY = "safetyFieldSendAppPWA_V128_IPAD";
 
 function formatKoreanDateForFile(dateValue){
   if(!dateValue) return "";
@@ -6168,54 +6168,418 @@ function waitForIpadPrintImages(timeoutMs=2500){
   });
 }
 
-async function printIpadPdf(){
-  updatePdfDocumentTitle();
-  saveForm(false);
-  syncPrintStatusSpans();
-  prepareIpadPhotoPrintState();
 
-  for(let i=0;i<=11;i++){
-    const box=document.getElementById("photoBox"+i);
-    const cell=document.getElementById("photoCell"+i);
-    if(box && cell && (box.dataset.image || box.querySelector("img"))){
-      cell.classList.add("has-photo");
-      const img = box.querySelector("img");
-      if(img && !box.querySelector(".photo-inner")){
-        const wrap=document.createElement("div");
-        wrap.className="photo-inner";
-        wrap.appendChild(img);
-        box.textContent="";
-        box.appendChild(wrap);
+function clonePageForIpadPrint(page){
+  const clone = page.cloneNode(true);
+
+  const originalControls = page.querySelectorAll("input, textarea, select");
+  const clonedControls = clone.querySelectorAll("input, textarea, select");
+
+  originalControls.forEach((origin, idx) => {
+    const target = clonedControls[idx];
+    if(!target) return;
+
+    if(target.type === "file"){
+      target.remove();
+      return;
+    }
+
+    if(target.tagName === "TEXTAREA"){
+      target.textContent = origin.value || "";
+      target.value = origin.value || "";
+      return;
+    }
+
+    if(target.tagName === "SELECT"){
+      Array.from(target.options).forEach(option => {
+        option.removeAttribute("selected");
+        if(option.value === origin.value) option.setAttribute("selected", "selected");
+      });
+      target.value = origin.value;
+      return;
+    }
+
+    if(target.type === "checkbox" || target.type === "radio"){
+      if(origin.checked){
+        target.setAttribute("checked", "checked");
+        target.checked = true;
+      }else{
+        target.removeAttribute("checked");
+        target.checked = false;
+      }
+      return;
+    }
+
+    target.setAttribute("value", origin.value || "");
+    target.value = origin.value || "";
+  });
+
+  // 사진은 원본 img/src를 그대로 유지하되, 아이패드 인쇄에서 cover로 잡히도록 보정
+  for(let i = 0; i <= 11; i++){
+    const originBox = document.getElementById("photoBox" + i);
+    const cloneBox = clone.querySelector("#photoBox" + i);
+    const cloneCell = clone.querySelector("#photoCell" + i);
+
+    if(originBox && cloneBox && (originBox.dataset.image || originBox.querySelector("img"))){
+      const src = originBox.dataset.image || originBox.querySelector("img")?.src;
+      if(src){
+        cloneBox.innerHTML = `<div class="photo-inner"><img class="auto-fit-photo" id="photoImg${i}" src="${src}" alt="점검사진${i+1}"></div>`;
+        cloneBox.dataset.image = src;
+        if(cloneCell) cloneCell.classList.add("has-photo");
       }
     }
   }
 
-  const page4 = document.getElementById("page4");
-  if(page4 && hasAnyPage4PhotoForPrint()){
-    page4.classList.remove("skip-print");
-    page4.classList.add("ipad-force-show");
-  }
+  clone.querySelectorAll(".photo-file-input,.photo-delete-btn,.photo-help,.photo-placed-mark").forEach(el => el.remove());
+  clone.querySelectorAll("[onclick]").forEach(el => el.removeAttribute("onclick"));
 
-  document.body.classList.add("ipad-pdf-mode");
-  document.body.classList.add("portrait-print-mode");
+  return clone;
+}
 
-  await waitForIpadPrintImages(4500);
+function collectIpadPrintPages(){
+  prepareIpadPhotoPrintState();
+
+  const pages = [];
+  const pageIds = ["page1","page2","page3","page4","page5"];
+
+  pageIds.forEach(id => {
+    const page = document.getElementById(id);
+    if(!page) return;
+
+    if(id === "page4" && !hasAnyPage4PhotoForPrint()){
+      return;
+    }
+
+    const clone = clonePageForIpadPrint(page);
+    clone.classList.add("ipad-print-page");
+    clone.classList.remove("skip-print");
+    pages.push(clone.outerHTML);
+  });
+
+  return pages;
+}
+
+function getIpadPrintCss(){
+  const styles = Array.from(document.querySelectorAll("style")).map(s => s.textContent || "").join("\n");
+
+  return `
+    ${styles}
+
+    @page{
+      size:210mm 297mm;
+      margin:0;
+    }
+
+    html, body{
+      width:210mm!important;
+      min-width:210mm!important;
+      max-width:210mm!important;
+      margin:0!important;
+      padding:0!important;
+      background:#fff!important;
+      overflow:visible!important;
+      -webkit-print-color-adjust:exact!important;
+      print-color-adjust:exact!important;
+    }
+
+    body{
+      font-family:"Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif!important;
+    }
+
+    .toolbar,.guide,.field-send-panel,.photo-picker-note,.signature-modal,.photo-choice-modal{
+      display:none!important;
+    }
+
+    .page.ipad-print-page{
+      display:block!important;
+      position:relative!important;
+      width:210mm!important;
+      min-width:210mm!important;
+      max-width:210mm!important;
+      height:296mm!important;
+      min-height:296mm!important;
+      max-height:296mm!important;
+      margin:0!important;
+      padding:6mm 7mm 5mm!important;
+      background:#fff!important;
+      box-shadow:none!important;
+      overflow:hidden!important;
+      transform:none!important;
+      -webkit-transform:none!important;
+      box-sizing:border-box!important;
+      page-break-before:auto!important;
+      break-before:auto!important;
+      page-break-after:always!important;
+      break-after:page!important;
+      page-break-inside:avoid!important;
+      break-inside:avoid!important;
+    }
+
+    .page.ipad-print-page:last-child{
+      page-break-after:auto!important;
+      break-after:auto!important;
+    }
+
+    table, tr, td, th{
+      page-break-inside:avoid!important;
+      break-inside:avoid!important;
+      border-color:#111!important;
+      visibility:visible!important;
+      opacity:1!important;
+    }
+
+    input, textarea, select{
+      color:#111!important;
+      background:transparent!important;
+      -webkit-text-fill-color:#111!important;
+    }
+
+    #page3.ipad-print-page,
+    #page4.ipad-print-page{
+      width:210mm!important;
+      height:296mm!important;
+      min-height:296mm!important;
+      max-height:296mm!important;
+      padding:4mm 6mm 4mm!important;
+      overflow:hidden!important;
+      box-sizing:border-box!important;
+    }
+
+    #page3.ipad-print-page .photo-page-title,
+    #page4.ipad-print-page .photo-page-title{
+      height:6mm!important;
+      min-height:6mm!important;
+      max-height:6mm!important;
+      line-height:6mm!important;
+      margin:0 0 1.5mm 0!important;
+      padding:0!important;
+      overflow:hidden!important;
+      font-size:10pt!important;
+    }
+
+    #page3.ipad-print-page .photo-page-table,
+    #page4.ipad-print-page .photo-page-table{
+      display:table!important;
+      width:198mm!important;
+      min-width:198mm!important;
+      max-width:198mm!important;
+      height:283mm!important;
+      min-height:283mm!important;
+      max-height:283mm!important;
+      margin:0 auto!important;
+      table-layout:fixed!important;
+      border-collapse:collapse!important;
+      border-spacing:0!important;
+      overflow:hidden!important;
+      page-break-inside:avoid!important;
+      break-inside:avoid!important;
+    }
+
+    #page3.ipad-print-page .photo-page-table tr:nth-child(odd),
+    #page4.ipad-print-page .photo-page-table tr:nth-child(odd){
+      height:85mm!important;
+      min-height:85mm!important;
+      max-height:85mm!important;
+    }
+
+    #page3.ipad-print-page .photo-page-table tr:nth-child(even),
+    #page4.ipad-print-page .photo-page-table tr:nth-child(even){
+      height:9.3mm!important;
+      min-height:9.3mm!important;
+      max-height:9.3mm!important;
+    }
+
+    #page3.ipad-print-page .photo-cell,
+    #page4.ipad-print-page .photo-cell{
+      width:99mm!important;
+      min-width:99mm!important;
+      max-width:99mm!important;
+      height:85mm!important;
+      min-height:85mm!important;
+      max-height:85mm!important;
+      padding:0!important;
+      margin:0!important;
+      overflow:hidden!important;
+      vertical-align:middle!important;
+      background:#fff!important;
+      box-sizing:border-box!important;
+      border:1.25px solid #111!important;
+    }
+
+    #page3.ipad-print-page .caption-cell,
+    #page4.ipad-print-page .caption-cell{
+      height:9.3mm!important;
+      min-height:9.3mm!important;
+      max-height:9.3mm!important;
+      padding:0!important;
+      margin:0!important;
+      overflow:hidden!important;
+      vertical-align:middle!important;
+      text-align:center!important;
+      border:1.25px solid #111!important;
+      background:#fff!important;
+    }
+
+    #page3.ipad-print-page .photo-box,
+    #page4.ipad-print-page .photo-box{
+      display:block!important;
+      position:relative!important;
+      width:100%!important;
+      height:85mm!important;
+      min-height:85mm!important;
+      max-height:85mm!important;
+      padding:3mm!important;
+      margin:0!important;
+      box-sizing:border-box!important;
+      overflow:hidden!important;
+      background:#fff!important;
+      color:#999!important;
+      font-size:8pt!important;
+      line-height:1.2!important;
+    }
+
+    #page3.ipad-print-page .photo-inner,
+    #page4.ipad-print-page .photo-inner{
+      display:block!important;
+      position:relative!important;
+      width:100%!important;
+      height:100%!important;
+      min-height:100%!important;
+      max-height:100%!important;
+      margin:0!important;
+      padding:0!important;
+      overflow:hidden!important;
+      box-sizing:border-box!important;
+      background:#fff!important;
+    }
+
+    #page3.ipad-print-page .photo-box img.auto-fit-photo,
+    #page4.ipad-print-page .photo-box img.auto-fit-photo,
+    #page3.ipad-print-page .photo-box img.drag-photo,
+    #page4.ipad-print-page .photo-box img.drag-photo{
+      position:absolute!important;
+      left:0!important;
+      top:0!important;
+      right:auto!important;
+      bottom:auto!important;
+      width:100%!important;
+      height:100%!important;
+      min-width:100%!important;
+      min-height:100%!important;
+      max-width:none!important;
+      max-height:none!important;
+      object-fit:cover!important;
+      object-position:center center!important;
+      display:block!important;
+      visibility:visible!important;
+      opacity:1!important;
+      transform:none!important;
+      -webkit-transform:none!important;
+      margin:0!important;
+      padding:0!important;
+      -webkit-print-color-adjust:exact!important;
+      print-color-adjust:exact!important;
+    }
+
+    .photo-file-input,
+    .photo-delete-btn,
+    .photo-help,
+    .photo-placed-mark{
+      display:none!important;
+    }
+  `;
+}
+
+function waitForIframeImages(doc, timeoutMs=4500){
+  const imgs = Array.from(doc.querySelectorAll("img"));
+  if(imgs.length === 0) return Promise.resolve();
+
+  return new Promise(resolve => {
+    let remaining = imgs.length;
+    let finished = false;
+
+    const finish = () => {
+      remaining -= 1;
+      if(remaining <= 0 && !finished){
+        finished = true;
+        resolve();
+      }
+    };
+
+    setTimeout(() => {
+      if(!finished){
+        finished = true;
+        resolve();
+      }
+    }, timeoutMs);
+
+    imgs.forEach(img => {
+      if(img.complete && img.naturalWidth){
+        finish();
+      }else{
+        img.addEventListener("load", finish, {once:true});
+        img.addEventListener("error", finish, {once:true});
+      }
+    });
+  });
+}
+
+async function printIpadPdf(){
+  updatePdfDocumentTitle();
+  saveForm(false);
+  syncPrintStatusSpans();
+
+  const pagesHtml = collectIpadPrintPages().join("\\n");
+  const title = buildPdfFileBaseName();
+
+  let iframe = document.getElementById("ipadPrintFrame");
+  if(iframe) iframe.remove();
+
+  iframe = document.createElement("iframe");
+  iframe.id = "ipadPrintFrame";
+  iframe.style.position = "fixed";
+  iframe.style.right = "0";
+  iframe.style.bottom = "0";
+  iframe.style.width = "1px";
+  iframe.style.height = "1px";
+  iframe.style.border = "0";
+  iframe.style.opacity = "0";
+  iframe.style.pointerEvents = "none";
+  document.body.appendChild(iframe);
+
+  const doc = iframe.contentDocument || iframe.contentWindow.document;
+  doc.open();
+  doc.write(`<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>${title}</title>
+<style>${getIpadPrintCss()}</style>
+</head>
+<body class="ipad-pdf-mode">
+${pagesHtml}
+</body>
+</html>`);
+  doc.close();
+
+  await new Promise(resolve => setTimeout(resolve, 350));
+  await waitForIframeImages(doc, 4500);
 
   const cleanup = () => {
     setTimeout(() => {
-      document.body.classList.remove("ipad-pdf-mode");
-      document.body.classList.remove("portrait-print-mode");
-      const page4 = document.getElementById("page4");
-      if(page4) page4.classList.remove("ipad-force-show");
+      const f = document.getElementById("ipadPrintFrame");
+      if(f) f.remove();
       window.removeEventListener("afterprint", cleanup);
-    }, 900);
+    }, 1200);
   };
   window.addEventListener("afterprint", cleanup);
 
+  iframe.contentWindow.focus();
   setTimeout(() => {
-    window.print();
+    iframe.contentWindow.print();
   }, 500);
 }
+
 
 function printWithPdfTitle(){
   updatePdfDocumentTitle();
