@@ -4590,7 +4590,7 @@
     <button onclick="downloadBuiltInCerts()">자격증명 3종 다운로드</button>
   </div>
   <div class="send-note">
-    사용 순서: <b>PDF 저장 / 인쇄</b>로 안전점검표 PDF를 만든 뒤, 반드시 위의 “완성된 안전점검표 PDF 선택(필수)”에 그 PDF를 선택하세요. 아이패드에서는 일반 PDF 저장 대신 <b>아이패드 PDF 인쇄</b> 버튼을 사용하세요. 아이패드는 별도 인쇄문서를 만들고, 사진을 미리 3mm 여백 포함 이미지로 변환하여 안드로이드 출력 결과와 최대한 동일하게 인쇄되도록 보정했습니다. 아이패드는 별도 인쇄문서를 만들고, 사진을 미리 3mm 여백 포함 이미지로 변환하여 안드로이드 출력 결과와 최대한 동일하게 인쇄되도록 보정했습니다. PDF를 선택하지 않으면 카카오톡/이메일에 안전점검표가 첨부되지 않습니다.
+    사용 순서: <b>PDF 저장 / 인쇄</b>로 안전점검표 PDF를 만든 뒤, 반드시 위의 “완성된 안전점검표 PDF 선택(필수)”에 그 PDF를 선택하세요. 아이패드에서는 일반 PDF 저장 대신 <b>아이패드 PDF 인쇄</b> 버튼을 사용하세요. 아이패드는 210mm×297mm 크기의 별도 인쇄문서를 만들어 안드로이드 출력 결과와 최대한 동일하게 인쇄되도록 보정했습니다. 아이패드는 210mm×297mm 크기의 별도 인쇄문서를 만들어 안드로이드 출력 결과와 최대한 동일하게 인쇄되도록 보정했습니다. PDF를 선택하지 않으면 카카오톡/이메일에 안전점검표가 첨부되지 않습니다.
     <b>카카오톡 보내기</b>는 발송내용과 PDF·자격증명 서류를 공유창으로 준비하며, 최종 발송은 카카오톡에서 직접 선택합니다. 개설신고확인증과 건축사자격증 사본에는 신청주소 기준 제출용 문구가 빨간 박스로 자동 표시됩니다.
     <b>이메일 보내기</b>는 네이버메일 또는 G메일 메일쓰기 화면을 열고 받는사람·제목·본문을 준비합니다. 최종 발송은 직접 확인 후 누르시면 됩니다.
   </div>
@@ -6170,70 +6170,14 @@ function waitForIpadPrintImages(timeoutMs=2500){
 
 
 
-function escapeHtmlAttr(value){
-  return String(value || "")
-    .replace(/&/g, "&amp;")
-    .replace(/"/g, "&quot;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-}
-
-function loadImageForIpadPrint(src){
-  return new Promise(resolve => {
-    if(!src){ resolve(null); return; }
-    const img = new Image();
-    img.onload = () => resolve(img);
-    img.onerror = () => resolve(null);
-    img.src = src;
+function applyImportantStyle(el, styles){
+  if(!el) return;
+  Object.entries(styles).forEach(([key, value]) => {
+    el.style.setProperty(key, value, "important");
   });
 }
 
-async function makeIpadPhotoCanvasDataUrl(src){
-  const img = await loadImageForIpadPrint(src);
-  if(!img || !img.naturalWidth || !img.naturalHeight) return src;
-
-  // 사진칸 비율과 동일하게 먼저 사진 이미지를 만들어 둡니다.
-  // 이렇게 하면 iPad Safari가 object-fit을 무시해도 인쇄 결과가 흔들리지 않습니다.
-  const canvasW = 990;
-  const canvasH = 825;
-  const margin = 30; // 사진칸 안쪽 약 3mm에 해당하는 비율
-  const innerX = margin;
-  const innerY = margin;
-  const innerW = canvasW - margin * 2;
-  const innerH = canvasH - margin * 2;
-
-  const canvas = document.createElement("canvas");
-  canvas.width = canvasW;
-  canvas.height = canvasH;
-
-  const ctx = canvas.getContext("2d", {alpha:false});
-  ctx.fillStyle = "#fff";
-  ctx.fillRect(0, 0, canvasW, canvasH);
-
-  const iw = img.naturalWidth;
-  const ih = img.naturalHeight;
-  const scale = Math.max(innerW / iw, innerH / ih);
-  const dw = iw * scale;
-  const dh = ih * scale;
-  const dx = innerX + (innerW - dw) / 2;
-  const dy = innerY + (innerH - dh) / 2;
-
-  ctx.save();
-  ctx.beginPath();
-  ctx.rect(innerX, innerY, innerW, innerH);
-  ctx.clip();
-  ctx.drawImage(img, dx, dy, dw, dh);
-  ctx.restore();
-
-  try{
-    return canvas.toDataURL("image/jpeg", 0.92);
-  }catch(err){
-    console.warn("아이패드 사진 캔버스 변환 실패", err);
-    return src;
-  }
-}
-
-async function clonePageForIpadPrint(page){
+function clonePageForIpadPrint(page){
   const clone = page.cloneNode(true);
 
   const originalControls = page.querySelectorAll("input, textarea, select");
@@ -6278,7 +6222,7 @@ async function clonePageForIpadPrint(page){
     target.value = origin.value || "";
   });
 
-  // 사진은 iPad 인쇄용으로 미리 크롭된 이미지로 변환합니다.
+  // iPad 인쇄용 사진은 기존 CSS 충돌을 피하기 위해 사진 DOM을 새로 구성합니다.
   for(let i = 0; i <= 11; i++){
     const originBox = document.getElementById("photoBox" + i);
     const cloneBox = clone.querySelector("#photoBox" + i);
@@ -6287,10 +6231,55 @@ async function clonePageForIpadPrint(page){
     if(originBox && cloneBox && (originBox.dataset.image || originBox.querySelector("img"))){
       const src = originBox.dataset.image || originBox.querySelector("img")?.src;
       if(src){
-        const fixedSrc = await makeIpadPhotoCanvasDataUrl(src);
-        cloneBox.innerHTML = `<img class="ipad-photo-canvas" id="ipadPhotoImg${i}" src="${escapeHtmlAttr(fixedSrc)}" alt="점검사진${i+1}">`;
-        cloneBox.dataset.image = fixedSrc;
-        if(cloneCell) cloneCell.classList.add("has-photo");
+        cloneBox.textContent = "";
+        cloneBox.dataset.image = src;
+
+        const inner = document.createElement("div");
+        inner.className = "photo-inner ipad-photo-inner";
+        applyImportantStyle(inner, {
+          "position":"relative",
+          "display":"block",
+          "width":"100%",
+          "height":"100%",
+          "overflow":"hidden",
+          "box-sizing":"border-box",
+          "background-color":"#fff"
+        });
+
+        const img = document.createElement("img");
+        img.className = "auto-fit-photo ipad-print-photo";
+        img.id = "photoImg" + i;
+        img.alt = "점검사진" + (i + 1);
+        img.src = src;
+        applyImportantStyle(img, {
+          "position":"absolute",
+          "left":"0",
+          "top":"0",
+          "width":"100%",
+          "height":"100%",
+          "min-width":"100%",
+          "min-height":"100%",
+          "max-width":"none",
+          "max-height":"none",
+          "object-fit":"cover",
+          "object-position":"center center",
+          "display":"block",
+          "visibility":"visible",
+          "opacity":"1",
+          "transform":"none",
+          "-webkit-transform":"none",
+          "margin":"0",
+          "padding":"0",
+          "-webkit-print-color-adjust":"exact",
+          "print-color-adjust":"exact"
+        });
+
+        inner.appendChild(img);
+        cloneBox.appendChild(inner);
+
+        if(cloneCell){
+          cloneCell.classList.add("has-photo");
+        }
       }
     }
   }
@@ -6298,33 +6287,38 @@ async function clonePageForIpadPrint(page){
   clone.querySelectorAll(".photo-file-input,.photo-delete-btn,.photo-help,.photo-placed-mark").forEach(el => el.remove());
   clone.querySelectorAll("[onclick]").forEach(el => el.removeAttribute("onclick"));
 
+  clone.classList.add("ipad-print-page");
+  clone.classList.remove("skip-print");
   return clone;
 }
 
-async function collectIpadPrintPages(){
+function collectIpadPrintPages(){
   prepareIpadPhotoPrintState();
 
-  const pages = [];
+  const clones = [];
   const pageIds = ["page1","page2","page3","page4","page5"];
 
-  for(const id of pageIds){
+  pageIds.forEach(id => {
     const page = document.getElementById(id);
-    if(!page) continue;
+    if(!page) return;
 
     if(id === "page4" && !hasAnyPage4PhotoForPrint()){
-      continue;
+      return;
     }
 
-    const clone = await clonePageForIpadPrint(page);
-    clone.classList.add("ipad-print-page");
-    clone.classList.remove("skip-print");
-    pages.push(clone.outerHTML);
+    clones.push(clonePageForIpadPrint(page));
+  });
+
+  if(clones.length){
+    clones[clones.length - 1].classList.add("last-print-page");
   }
 
-  return pages;
+  return clones.map(clone => clone.outerHTML);
 }
 
 function getIpadPrintCss(){
+  // 기존 스타일은 유지하되, iframe body에는 ipad-pdf-mode를 붙이지 않아
+  // 누적된 아이패드 보정 CSS가 서로 충돌하지 않도록 합니다.
   const styles = Array.from(document.querySelectorAll("style")).map(s => s.textContent || "").join("\n");
 
   return `
@@ -6339,6 +6333,7 @@ function getIpadPrintCss(){
       width:210mm!important;
       min-width:210mm!important;
       max-width:210mm!important;
+      height:auto!important;
       margin:0!important;
       padding:0!important;
       background:#fff!important;
@@ -6347,9 +6342,10 @@ function getIpadPrintCss(){
       print-color-adjust:exact!important;
     }
 
-    body{
+    body.ipad-render-document{
       font-family:"Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif!important;
-      line-height:1.2!important;
+      margin:0!important;
+      padding:0!important;
     }
 
     .toolbar,.guide,.field-send-panel,.photo-picker-note,.signature-modal,.photo-choice-modal{
@@ -6362,11 +6358,11 @@ function getIpadPrintCss(){
       width:210mm!important;
       min-width:210mm!important;
       max-width:210mm!important;
-      height:292mm!important;
-      min-height:292mm!important;
-      max-height:292mm!important;
+      height:295.5mm!important;
+      min-height:295.5mm!important;
+      max-height:295.5mm!important;
       margin:0!important;
-      padding:6mm 7mm 5mm!important;
+      padding:5mm 6mm 4mm!important;
       background:#fff!important;
       box-shadow:none!important;
       overflow:hidden!important;
@@ -6381,7 +6377,7 @@ function getIpadPrintCss(){
       break-inside:avoid!important;
     }
 
-    .page.ipad-print-page:last-child{
+    .page.ipad-print-page.last-print-page{
       page-break-after:auto!important;
       break-after:auto!important;
     }
@@ -6394,6 +6390,11 @@ function getIpadPrintCss(){
       opacity:1!important;
     }
 
+    table.form th,
+    table.form td{
+      border-color:#111!important;
+    }
+
     input, textarea, select{
       color:#111!important;
       background:transparent!important;
@@ -6403,10 +6404,10 @@ function getIpadPrintCss(){
     #page3.ipad-print-page,
     #page4.ipad-print-page{
       width:210mm!important;
-      height:292mm!important;
-      min-height:292mm!important;
-      max-height:292mm!important;
-      padding:4mm 6mm 3mm!important;
+      height:295.5mm!important;
+      min-height:295.5mm!important;
+      max-height:295.5mm!important;
+      padding:3.5mm 5.5mm 3mm!important;
       overflow:hidden!important;
       box-sizing:border-box!important;
     }
@@ -6417,7 +6418,7 @@ function getIpadPrintCss(){
       min-height:6mm!important;
       max-height:6mm!important;
       line-height:6mm!important;
-      margin:0 0 1.2mm 0!important;
+      margin:0 0 1mm 0!important;
       padding:0!important;
       overflow:hidden!important;
       font-size:10pt!important;
@@ -6426,12 +6427,12 @@ function getIpadPrintCss(){
     #page3.ipad-print-page .photo-page-table,
     #page4.ipad-print-page .photo-page-table{
       display:table!important;
-      width:198mm!important;
-      min-width:198mm!important;
-      max-width:198mm!important;
-      height:275mm!important;
-      min-height:275mm!important;
-      max-height:275mm!important;
+      width:199mm!important;
+      min-width:199mm!important;
+      max-width:199mm!important;
+      height:282mm!important;
+      min-height:282mm!important;
+      max-height:282mm!important;
       margin:0 auto!important;
       table-layout:fixed!important;
       border-collapse:collapse!important;
@@ -6443,26 +6444,26 @@ function getIpadPrintCss(){
 
     #page3.ipad-print-page .photo-page-table tr:nth-child(odd),
     #page4.ipad-print-page .photo-page-table tr:nth-child(odd){
-      height:82.5mm!important;
-      min-height:82.5mm!important;
-      max-height:82.5mm!important;
+      height:85.5mm!important;
+      min-height:85.5mm!important;
+      max-height:85.5mm!important;
     }
 
     #page3.ipad-print-page .photo-page-table tr:nth-child(even),
     #page4.ipad-print-page .photo-page-table tr:nth-child(even){
-      height:9.15mm!important;
-      min-height:9.15mm!important;
-      max-height:9.15mm!important;
+      height:8.5mm!important;
+      min-height:8.5mm!important;
+      max-height:8.5mm!important;
     }
 
     #page3.ipad-print-page .photo-cell,
     #page4.ipad-print-page .photo-cell{
-      width:99mm!important;
-      min-width:99mm!important;
-      max-width:99mm!important;
-      height:82.5mm!important;
-      min-height:82.5mm!important;
-      max-height:82.5mm!important;
+      width:99.5mm!important;
+      min-width:99.5mm!important;
+      max-width:99.5mm!important;
+      height:85.5mm!important;
+      min-height:85.5mm!important;
+      max-height:85.5mm!important;
       padding:0!important;
       margin:0!important;
       overflow:hidden!important;
@@ -6474,9 +6475,9 @@ function getIpadPrintCss(){
 
     #page3.ipad-print-page .caption-cell,
     #page4.ipad-print-page .caption-cell{
-      height:9.15mm!important;
-      min-height:9.15mm!important;
-      max-height:9.15mm!important;
+      height:8.5mm!important;
+      min-height:8.5mm!important;
+      max-height:8.5mm!important;
       padding:0!important;
       margin:0!important;
       overflow:hidden!important;
@@ -6491,10 +6492,10 @@ function getIpadPrintCss(){
       display:block!important;
       position:relative!important;
       width:100%!important;
-      height:82.5mm!important;
-      min-height:82.5mm!important;
-      max-height:82.5mm!important;
-      padding:0!important;
+      height:85.5mm!important;
+      min-height:85.5mm!important;
+      max-height:85.5mm!important;
+      padding:3mm!important;
       margin:0!important;
       box-sizing:border-box!important;
       overflow:hidden!important;
@@ -6504,24 +6505,47 @@ function getIpadPrintCss(){
       line-height:1.2!important;
     }
 
-    #page3.ipad-print-page .ipad-photo-canvas,
-    #page4.ipad-print-page .ipad-photo-canvas{
+    #page3.ipad-print-page .photo-inner,
+    #page4.ipad-print-page .photo-inner,
+    #page3.ipad-print-page .ipad-photo-inner,
+    #page4.ipad-print-page .ipad-photo-inner{
       display:block!important;
+      position:relative!important;
       width:100%!important;
-      height:82.5mm!important;
-      min-width:100%!important;
-      min-height:82.5mm!important;
-      max-width:100%!important;
-      max-height:82.5mm!important;
-      object-fit:fill!important;
-      object-position:center center!important;
-      visibility:visible!important;
-      opacity:1!important;
+      height:100%!important;
+      min-height:100%!important;
+      max-height:100%!important;
       margin:0!important;
       padding:0!important;
-      border:0!important;
+      overflow:hidden!important;
+      box-sizing:border-box!important;
+      background:#fff!important;
+    }
+
+    #page3.ipad-print-page img.ipad-print-photo,
+    #page4.ipad-print-page img.ipad-print-photo,
+    #page3.ipad-print-page .photo-box img.auto-fit-photo,
+    #page4.ipad-print-page .photo-box img.auto-fit-photo{
+      position:absolute!important;
+      left:0!important;
+      top:0!important;
+      right:auto!important;
+      bottom:auto!important;
+      width:100%!important;
+      height:100%!important;
+      min-width:100%!important;
+      min-height:100%!important;
+      max-width:none!important;
+      max-height:none!important;
+      object-fit:cover!important;
+      object-position:center center!important;
+      display:block!important;
+      visibility:visible!important;
+      opacity:1!important;
       transform:none!important;
       -webkit-transform:none!important;
+      margin:0!important;
+      padding:0!important;
       -webkit-print-color-adjust:exact!important;
       print-color-adjust:exact!important;
     }
@@ -6574,7 +6598,7 @@ async function printIpadPdf(){
   saveForm(false);
   syncPrintStatusSpans();
 
-  const pagesHtml = (await collectIpadPrintPages()).join("\\n");
+  const pagesHtml = collectIpadPrintPages().join("\\n");
   const title = buildPdfFileBaseName();
 
   let iframe = document.getElementById("ipadPrintFrame");
@@ -6583,13 +6607,14 @@ async function printIpadPdf(){
   iframe = document.createElement("iframe");
   iframe.id = "ipadPrintFrame";
   iframe.style.position = "fixed";
-  iframe.style.right = "0";
-  iframe.style.bottom = "0";
-  iframe.style.width = "1px";
-  iframe.style.height = "1px";
+  iframe.style.left = "-10000px";
+  iframe.style.top = "0";
+  iframe.style.width = "210mm";
+  iframe.style.height = "297mm";
   iframe.style.border = "0";
-  iframe.style.opacity = "0";
+  iframe.style.opacity = "0.01";
   iframe.style.pointerEvents = "none";
+  iframe.setAttribute("aria-hidden", "true");
   document.body.appendChild(iframe);
 
   const doc = iframe.contentDocument || iframe.contentWindow.document;
@@ -6598,33 +6623,33 @@ async function printIpadPdf(){
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${title}</title>
 <style>${getIpadPrintCss()}</style>
 </head>
-<body class="ipad-pdf-mode">
+<body class="ipad-render-document">
 ${pagesHtml}
 </body>
 </html>`);
   doc.close();
 
-  await new Promise(resolve => setTimeout(resolve, 450));
-  await waitForIframeImages(doc, 4500);
+  await new Promise(resolve => setTimeout(resolve, 500));
+  await waitForIframeImages(doc, 5000);
 
   const cleanup = () => {
     setTimeout(() => {
       const f = document.getElementById("ipadPrintFrame");
       if(f) f.remove();
       window.removeEventListener("afterprint", cleanup);
-    }, 1200);
+    }, 1400);
   };
   window.addEventListener("afterprint", cleanup);
 
   iframe.contentWindow.focus();
   setTimeout(() => {
     iframe.contentWindow.print();
-  }, 500);
+  }, 600);
 }
-
 
 
 function printWithPdfTitle(){
