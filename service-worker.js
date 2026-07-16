@@ -1,4 +1,4 @@
-const CACHE_NAME = "safety-field-send-pwa-v130-ipad";
+const CACHE_NAME = "safety-field-send-pwa-v131-ipad";
 const APP_SHELL = [
   "./",
   "./index.html",
