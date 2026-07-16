@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>외도민 안전점검표 현장발송앱 PWA v125-iPad</title>
+<title>외도민 안전점검표 현장발송앱 PWA v126-iPad</title>
 <style>
   :root{
     --line:#111;
@@ -4029,7 +4029,7 @@
   }
 
 
-  /* v125-iPad: 아이패드 PDF 인쇄 사진표/사진 출력 보정 */
+  /* v126-iPad: 아이패드 PDF 인쇄 사진표/사진 출력 보정 */
   @media print{
     body.ipad-pdf-mode #page3 .photo-page-table,
     body.ipad-pdf-mode #page4 .photo-page-table{
@@ -4145,6 +4145,144 @@
     }
   }
 
+
+  /* v126-iPad: 아이패드 사진 여백 3mm + 빈 페이지 방지 보정 */
+  @media print{
+    body.ipad-pdf-mode #page3,
+    body.ipad-pdf-mode #page4{
+      width:190mm!important;
+      min-width:190mm!important;
+      max-width:190mm!important;
+      padding:7mm 8mm 6mm!important;
+      min-height:0!important;
+      height:auto!important;
+      overflow:visible!important;
+      page-break-inside:avoid!important;
+      break-inside:avoid!important;
+    }
+
+    body.ipad-pdf-mode #page3 .photo-page-title,
+    body.ipad-pdf-mode #page4 .photo-page-title{
+      margin:0 0 2.2mm 0!important;
+      line-height:1.2!important;
+    }
+
+    body.ipad-pdf-mode #page3 .photo-page-table,
+    body.ipad-pdf-mode #page4 .photo-page-table{
+      display:table!important;
+      width:100%!important;
+      height:264mm!important;
+      min-height:264mm!important;
+      max-height:264mm!important;
+      table-layout:fixed!important;
+      border-collapse:collapse!important;
+      page-break-inside:avoid!important;
+      break-inside:avoid!important;
+      overflow:hidden!important;
+    }
+
+    body.ipad-pdf-mode #page3 .photo-page-table tr:nth-child(odd),
+    body.ipad-pdf-mode #page4 .photo-page-table tr:nth-child(odd){
+      height:55mm!important;
+      min-height:55mm!important;
+      max-height:55mm!important;
+    }
+    body.ipad-pdf-mode #page3 .photo-page-table tr:nth-child(even),
+    body.ipad-pdf-mode #page4 .photo-page-table tr:nth-child(even){
+      height:8mm!important;
+      min-height:8mm!important;
+      max-height:8mm!important;
+    }
+
+    body.ipad-pdf-mode #page3 .photo-cell,
+    body.ipad-pdf-mode #page4 .photo-cell{
+      position:relative!important;
+      width:50%!important;
+      height:55mm!important;
+      min-height:55mm!important;
+      max-height:55mm!important;
+      padding:0!important;
+      margin:0!important;
+      overflow:hidden!important;
+      background:#fff!important;
+      vertical-align:middle!important;
+      box-sizing:border-box!important;
+    }
+
+    body.ipad-pdf-mode #page3 .caption-cell,
+    body.ipad-pdf-mode #page4 .caption-cell{
+      height:8mm!important;
+      min-height:8mm!important;
+      max-height:8mm!important;
+      padding:0!important;
+      margin:0!important;
+      overflow:hidden!important;
+      vertical-align:middle!important;
+    }
+
+    body.ipad-pdf-mode #page3 .photo-box,
+    body.ipad-pdf-mode #page4 .photo-box{
+      position:relative!important;
+      display:block!important;
+      width:100%!important;
+      height:55mm!important;
+      min-height:55mm!important;
+      max-height:55mm!important;
+      padding:3mm!important;
+      margin:0!important;
+      overflow:hidden!important;
+      box-sizing:border-box!important;
+      background:#fff!important;
+    }
+
+    body.ipad-pdf-mode #page3 .photo-inner,
+    body.ipad-pdf-mode #page4 .photo-inner{
+      position:relative!important;
+      display:block!important;
+      width:100%!important;
+      height:100%!important;
+      min-height:100%!important;
+      max-height:100%!important;
+      overflow:hidden!important;
+      background:#fff!important;
+      box-sizing:border-box!important;
+    }
+
+    body.ipad-pdf-mode #page3 .photo-box img.auto-fit-photo,
+    body.ipad-pdf-mode #page4 .photo-box img.auto-fit-photo,
+    body.ipad-pdf-mode #page3 .photo-box img.drag-photo,
+    body.ipad-pdf-mode #page4 .photo-box img.drag-photo{
+      position:absolute!important;
+      inset:0!important;
+      width:100%!important;
+      height:100%!important;
+      min-width:100%!important;
+      min-height:100%!important;
+      max-width:none!important;
+      max-height:none!important;
+      object-fit:cover!important;
+      object-position:center center!important;
+      display:block!important;
+      visibility:visible!important;
+      opacity:1!important;
+      transform:none!important;
+      -webkit-transform:none!important;
+      -webkit-print-color-adjust:exact!important;
+      print-color-adjust:exact!important;
+    }
+
+    body.ipad-pdf-mode #page3 .photo-file-input,
+    body.ipad-pdf-mode #page4 .photo-file-input,
+    body.ipad-pdf-mode #page3 .photo-help,
+    body.ipad-pdf-mode #page4 .photo-help,
+    body.ipad-pdf-mode #page3 .photo-delete-btn,
+    body.ipad-pdf-mode #page4 .photo-delete-btn,
+    body.ipad-pdf-mode #page3 .photo-placed-mark,
+    body.ipad-pdf-mode #page4 .photo-placed-mark{
+      display:none!important;
+    }
+  }
+
 </style>
 
 <link rel="manifest" href="manifest.webmanifest">
@@ -4157,7 +4295,7 @@
 </head>
 <body>
 <div class="toolbar">
-  <strong>외도민 안전점검표 현장발송앱 PWA v125-iPad</strong>
+  <strong>외도민 안전점검표 현장발송앱 PWA v126-iPad</strong>
   <button class="primary" onclick="saveForm()">입력값 저장</button>
   <button onclick="printWithPdfTitle()">PDF 저장 / 인쇄</button>
   <button onclick="printIpadPdf()">아이패드 PDF 인쇄</button>
@@ -4214,7 +4352,7 @@
     <button onclick="downloadBuiltInCerts()">자격증명 3종 다운로드</button>
   </div>
   <div class="send-note">
-    사용 순서: <b>PDF 저장 / 인쇄</b>로 안전점검표 PDF를 만든 뒤, 반드시 위의 “완성된 안전점검표 PDF 선택(필수)”에 그 PDF를 선택하세요. 아이패드에서는 일반 PDF 저장 대신 <b>아이패드 PDF 인쇄</b> 버튼을 사용하세요. PDF를 선택하지 않으면 카카오톡/이메일에 안전점검표가 첨부되지 않습니다.
+    사용 순서: <b>PDF 저장 / 인쇄</b>로 안전점검표 PDF를 만든 뒤, 반드시 위의 “완성된 안전점검표 PDF 선택(필수)”에 그 PDF를 선택하세요. 아이패드에서는 일반 PDF 저장 대신 <b>아이패드 PDF 인쇄</b> 버튼을 사용하세요. 사진은 안드로이드처럼 사진틀 안쪽 약 3mm 여백만 두고 꽉 차게 인쇄되도록 보정했습니다. PDF를 선택하지 않으면 카카오톡/이메일에 안전점검표가 첨부되지 않습니다.
     <b>카카오톡 보내기</b>는 발송내용과 PDF·자격증명 서류를 공유창으로 준비하며, 최종 발송은 카카오톡에서 직접 선택합니다. 개설신고확인증과 건축사자격증 사본에는 신청주소 기준 제출용 문구가 빨간 박스로 자동 표시됩니다.
     <b>이메일 보내기</b>는 네이버메일 또는 G메일 메일쓰기 화면을 열고 받는사람·제목·본문을 준비합니다. 최종 발송은 직접 확인 후 누르시면 됩니다.
   </div>
@@ -4454,7 +4592,7 @@
       <td class="detail-cell"><textarea id="detail_15"></textarea></td>
     </tr>
   </table>
-  <div class="footer-memo">※ 첫째장 입력형 / 현장발송앱 PWA v125-iPad</div>
+  <div class="footer-memo">※ 첫째장 입력형 / 현장발송앱 PWA v126-iPad</div>
 </section>
 
 <section class="page" id="page2">
@@ -4879,9 +5017,9 @@ function loadForm(){
   const candidateKeys = [
     STABLE_STORAGE_KEY,
     VERSION_STORAGE_KEY,
-    "safetyFieldSendAppPWA_V125_IPAD",
-    "safetyFieldSendAppPWA_V125_IPAD",
-    "safetyFieldSendAppPWA_V125_IPAD",
+    "safetyFieldSendAppPWA_V126_IPAD",
+    "safetyFieldSendAppPWA_V126_IPAD",
+    "safetyFieldSendAppPWA_V126_IPAD",
     "safetyFieldSendAppPWA_V98",
     "safetyFieldSendAppPWA_V97",
     "safetyFieldSendAppV96",
@@ -4954,9 +5092,9 @@ function clearForm(){
     [
       STABLE_STORAGE_KEY,
       VERSION_STORAGE_KEY,
-      "safetyFieldSendAppPWA_V125_IPAD",
-      "safetyFieldSendAppPWA_V125_IPAD",
-      "safetyFieldSendAppPWA_V125_IPAD",
+      "safetyFieldSendAppPWA_V126_IPAD",
+      "safetyFieldSendAppPWA_V126_IPAD",
+      "safetyFieldSendAppPWA_V126_IPAD",
       "safetyFieldSendAppPWA_V98",
       "safetyFieldSendAppPWA_V97",
       "safetyFieldSendAppV96",
@@ -4999,7 +5137,7 @@ function fillSample(){
 
 function clearForm(){
   if(confirm("입력값을 모두 초기화할까요?")){
-    localStorage.removeItem("safetyFieldSendAppPWA_V125_IPAD");
+    localStorage.removeItem("safetyFieldSendAppPWA_V126_IPAD");
     location.reload();
   }
 }
@@ -5643,7 +5781,7 @@ document.addEventListener("change", (e) => {
 
 
 const STABLE_STORAGE_KEY = "mukjulSafetyInspectionCurrentData";
-const VERSION_STORAGE_KEY = "safetyFieldSendAppPWA_V125_IPAD";
+const VERSION_STORAGE_KEY = "safetyFieldSendAppPWA_V126_IPAD";
 
 function formatKoreanDateForFile(dateValue){
   if(!dateValue) return "";
@@ -5798,9 +5936,33 @@ async function printIpadPdf(){
   syncPrintStatusSpans();
   prepareIpadPhotoPrintState();
 
+  for(let i=0;i<=11;i++){
+    const box=document.getElementById("photoBox"+i);
+    const cell=document.getElementById("photoCell"+i);
+    if(box && cell && (box.dataset.image || box.querySelector("img"))){
+      cell.classList.add("has-photo");
+      if(!box.querySelector('.photo-inner')){
+        const imgs=box.querySelectorAll('img');
+        if(imgs.length){
+          const wrap=document.createElement('div');
+          wrap.className='photo-inner';
+          imgs.forEach(img=>wrap.appendChild(img));
+          box.textContent='';
+          box.appendChild(wrap);
+        }
+      }
+    }
+  }
+
+  const page4 = document.getElementById("page4");
+  if(page4 && hasAnyPage4PhotoForPrint()){
+    page4.classList.remove("skip-print");
+    page4.classList.add("ipad-force-show");
+  }
+
   document.body.classList.add("ipad-pdf-mode");
 
-  await waitForIpadPrintImages(3000);
+  await waitForIpadPrintImages(4200);
 
   const cleanup = () => {
     setTimeout(() => {
@@ -5808,13 +5970,13 @@ async function printIpadPdf(){
       const page4 = document.getElementById("page4");
       if(page4) page4.classList.remove("ipad-force-show");
       window.removeEventListener("afterprint", cleanup);
-    }, 700);
+    }, 900);
   };
   window.addEventListener("afterprint", cleanup);
 
   setTimeout(() => {
     window.print();
-  }, 250);
+  }, 450);
 }
 
 function printWithPdfTitle(){
